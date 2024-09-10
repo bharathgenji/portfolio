@@ -1,0 +1,14 @@
+import React from 'react';
+
+function Contact() {
+  return (
+    <div>
+      <h2>Contact Me</h2>
+      <p>Email: bharath.genjimohanaranga@gmail.gwmail.gwu.edu</p>
+      <p>Phone: +1 571 259 4792</p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/bharath-gm/">https://www.linkedin.com/in/bharath-gm/</a></p>
+    </div>
+  );
+}
+
+export default Contact;

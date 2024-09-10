@@ -1,0 +1,12 @@
+import React from 'react';
+
+function About() {
+  return (
+    <div>
+      <h2>About Me</h2>
+      <p>Bharath Genji Mohanaranga is a Data Scientist and Engineer based in Washington DC...</p>
+    </div>
+  );
+}
+
+export default About;
