@@ -1,68 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Flex, Text, Button, Image, Link } from '@chakra-ui/react';
-import axios from 'axios';
+import React from 'react';
+import { Box, Flex, Heading, Text, Button, Image } from '@chakra-ui/react';
+import Header from './Header'; 
+import Footer from './Footer'; 
 
 const BioSection = () => {
-  const [bio, setBio] = useState({});
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:5000/api/bio')
-      .then((response) => setBio(response.data))
-      .catch((error) => console.error('Error fetching bio:', error));
-  }, []);
-
   return (
-    <Flex
-      direction={['column', 'row']}
-      align="center"
-      justify="space-between"
-      bg="secondary"
-      color="white"
-      p={12}
-    >
-      {/* Profile Image Section */}
-      <Box textAlign="center" mt={[8, 0]} mr={[0, 8]}>
-        <Image
-          src="/images/bharath.jpg" // Correct path for the image file in the public folder
-          alt="Bharath Genji"
-          boxSize={['150px', '200px']} // Responsive size for smaller and larger screens
-          borderRadius="full"
-          objectFit="cover"
-          borderWidth="4px"
-          borderColor="#F2C94C" // Custom yellow shade
-          shadow="lg"
-        />
-        <Text fontSize="lg" fontWeight="bold" color="#F2C94C" mt={4}>
-          Data Scientist and Cloud Engineer at XYZ Company
-        </Text>
-      </Box>
-
-      {/* Bio Text Section */}
-      <Box maxW="lg" textAlign={['center', 'left']}>
-        <Text fontSize="5xl" fontWeight="extrabold" color="#F2C94C" mb={4}>
-          {bio.name}
-        </Text>
-        <Text fontSize="lg" mb={4}>
-          {bio.intro}
-        </Text>
-        <Text fontSize="md" mb={4}>
-          {bio.professional_summary}
-        </Text>
-        <Button
-          as={Link}
-          href="/resume/Bharath Genji Resume.pdf" // Correct path for the resume file in the public folder
-          download="Bharath_Genji_Resume.pdf"
-          mt={4}
-          bg="#F2C94C"
-          color="black"
-          _hover={{ bg: 'yellow.400' }}
-          shadow="lg"
+    <>
+      <Header />
+      <Box bg="#1A1A1A" color="#f0e7db" py="5rem" px="2rem" textAlign="center">
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          maxWidth="1200px"
+          mx="auto"
+          direction={['column', 'column', 'row']}
+          gap="2rem"
         >
-          Download Resume
-        </Button>
-      </Box>
-    </Flex>
+          {/* Left Section */}
+          <Box flex="1" textAlign={['center', 'center', 'left']} pr={['0', '0', '4rem']}>
+            <Heading as="h1" fontSize={['2.5rem', '3rem', '4rem']} fontWeight="bold" color="#FFD700">
+              NICE TO MEET YOU! I’M BHARATH 👋
+            </Heading>
+            <Text fontSize={['1rem', '1.2rem', '1.5rem']} mt="1.5rem" lineHeight="1.8" color="#e0e0e0">
+              I’m a Data Scientist and Cloud Engineer at XYZ Company, passionate about leveraging data to drive meaningful insights and create innovative solutions.
+            </Text>
+            <Text fontSize={['0.9rem', '1rem', '1.2rem']} mt="1rem" color="#c0c0c0">
+              7+ years of experience in software development and data science.
+            </Text>
+            <Button
+              mt="2rem"
+              colorScheme="yellow"
+              bg="#FFD700"
+              color="black"
+              _hover={{ bg: '#FFC107' }}
+              borderRadius="full"
+              px="2rem"
+              boxShadow="lg"
+              onClick={() => window.open('/resume/Bharath_Genji_Resume.pdf')}
+            >
+              Download Resume
+            </Button>
+          </Box>
+
+{/* Right Section - Enlarged Image */}
+<Box flex="1" textAlign="center">
+          <Image
+            src="/images/bharath.jpg"
+            alt="Bharath Genji"
+            boxSize="350px" // Adjusted size to 350px for better balance
+            borderRadius="full"
+            border="5px solid" // Adjusted border width for better visual balance
+            borderColor="white.400" // Keeping the border color consistent
+            mx="auto"
+          />
+          <Text mt="1rem" fontSize="1.2rem">
+            Data Scientist and Cloud Engineer at XYZ Company
+          </Text>
+        </Box>
+      </Flex>
+    </Box>
+      <Footer />
+    </>
   );
 };
 

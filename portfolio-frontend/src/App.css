@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+body {
+  background-color: #1A1A1A; /* Dark background for the whole page */
+  color: #f0e7db; /* Light text color */
+  font-family: 'Poppins', sans-serif; /* A modern and readable font */
+}
+
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4); /* Light shadow for hover effect */
+}

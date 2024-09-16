@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Flex, Text, Button, Link, Divider, IconButton } from '@chakra-ui/react';
+import { Box, Flex, Text, Button, Divider, IconButton } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom'; // Use NavLink for better routing
 import { FaSearch } from 'react-icons/fa';
 
 const Header = () => {
@@ -22,12 +23,12 @@ const Header = () => {
 
         {/* Navigation Links */}
         <Flex align="center" gap={6} ml={6}>
-          <Link href="/" _hover={{ color: 'primary' }}>About</Link>
-          <Link href="/blog" _hover={{ color: 'primary' }}>Blog</Link>
-          <Link href="/contact" _hover={{ color: 'primary' }}>Contact</Link>
-          <Link href="/mentoring" _hover={{ color: 'primary' }}>Mentoring</Link>
-          <Link href="/portfolio" _hover={{ color: 'primary' }}>Portfolio</Link>
-          <Link href="/speaking" _hover={{ color: 'primary' }}>Speaking</Link>
+          <NavLink to="/about" style={({ isActive }) => ({ color: isActive ? 'yellow' : 'white' })}>About</NavLink>
+          <NavLink to="/blog" style={({ isActive }) => ({ color: isActive ? 'yellow' : 'white' })}>Blog</NavLink>
+          <NavLink to="/contact" style={({ isActive }) => ({ color: isActive ? 'yellow' : 'white' })}>Contact</NavLink>
+          <NavLink to="/mentoring" style={({ isActive }) => ({ color: isActive ? 'yellow' : 'white' })}>Mentoring</NavLink>
+          <NavLink to="/portfolio" style={({ isActive }) => ({ color: isActive ? 'yellow' : 'white' })}>Portfolio</NavLink>
+          <NavLink to="/speaking" style={({ isActive }) => ({ color: isActive ? 'yellow' : 'white' })}>Speaking</NavLink>
         </Flex>
 
         {/* Action Buttons */}
