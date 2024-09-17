@@ -1,14 +1,10 @@
-import React, { useState } from 'react';
-import { 
-  Box, Flex, Text, Divider, Icon, VStack, HStack, useDisclosure, 
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, 
-  ModalBody, ModalFooter, Button ,Image
-} from '@chakra-ui/react';
+import React from 'react';
+import { Box, Flex, Text, VStack, Divider,Icon } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap, FaTrophy, FaBook } from 'react-icons/fa'; // Import icons
+
 // Convert Chakra components to motion-enabled components
-const MotionFlex = motion(Flex);
-const MotionBox = motion(Box);
+
 
 const educationDetails = [
   {
@@ -154,7 +150,10 @@ const academicExperiences = [
 ];
 
 
-const EducationCard = ({ education }) => (
+const MotionFlex = motion(Flex);
+
+// Define ExperienceCard component for timeline
+const ExperienceCard = ({ experience, isLeft }) => (
   <MotionFlex
     align="center"
     p={6}
@@ -162,67 +161,53 @@ const EducationCard = ({ education }) => (
     borderRadius="md"
     shadow="md"
     mb={4}
-    initial={{ opacity: 0, y: 50 }}
+    position="relative"
+    w={['100%', '45%']}
+    left={isLeft ? '0%' : '55%'}
+    initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, ease: 'easeOut' }}
     whileHover={{ scale: 1.05 }}
   >
-    <Image src={education.icon} boxSize="50px" mr={4} />
-    <Box>
-      <Text fontSize="lg" fontWeight="bold" color="#f2c94c">{education.degree}</Text>
-      <Text color="#ffffff">{education.institution}</Text>
-      <Text color="#a0aec0">{education.location} | {education.date}</Text>
-      <Text mt={2} color="#a0aec0">{education.details}</Text>
-    </Box>
-  </MotionFlex>
-);
-
-const ExperienceCard = ({ experience, type }) => (
-  <MotionFlex
-    align="center"
-    p={6}
-    bg="#1a1a1a"
-    borderRadius="md"
-    shadow="md"
-    mb={4}
-    initial={{ opacity: 0, x: -50 }}
-    animate={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.5, ease: 'easeOut' }}
-    whileHover={{ scale: 1.05 }}
-  >
     <Box mr={4}>
-      <FaBriefcase color={type === "Professional" ? "#f2c94c" : "#a0aec0"} size={24} />
+      <Icon as={experience.type === 'Professional' ? FaBriefcase : FaGraduationCap} color="#f2c94c" size="24px" />
     </Box>
     <Box>
-      <Text fontSize="lg" fontWeight="bold" color="#f2c94c">{experience.title}</Text>
+      <Text fontSize="lg" fontWeight="bold" color="#f2c94c">
+        {experience.position}
+      </Text>
       <Text color="#ffffff">{experience.company}</Text>
       <Text color="#a0aec0">{experience.location} | {experience.date}</Text>
-      <Text mt={2} color="#a0aec0">{experience.details}</Text>
+      {experience.description.map((desc, index) => (
+        <Text key={index} mt={2} color="#a0aec0">{desc}</Text>
+      ))}
     </Box>
   </MotionFlex>
 );
 
-const ExperienceSection = () => (
-  <Box bg="#1a1a1a" color="white" py={16} px={8}>
-    <Text fontSize="4xl" fontWeight="bold" color="#f2c94c" mb={8}>Experience</Text>
-    <VStack align="start" spacing={6}>
-      {professionalExperiences.map((experience, index) => (
-        <ExperienceCard key={index} experience={experience} type="Professional" />
-      ))}
-      {academicExperiences.map((experience, index) => (
-        <ExperienceCard key={index} experience={experience} type="Academic" />
-      ))}
-    </VStack>
+const ExperienceSection = () => {
+  const allExperiences = [...professionalExperiences, ...academicExperiences]; // Combine all experiences
 
-    <Divider my={16} borderColor="#333" />
+  return (
+    <Box py={16} position="relative">
+      <Text fontSize="3xl" fontWeight="bold" color="#f2c94c" mb={8}>
+        Experience Timeline
+      </Text>
 
-    <Text fontSize="4xl" fontWeight="bold" color="#f2c94c" mt={16} mb={8}>Education</Text>
-    <VStack align="start" spacing={6}>
-      {educationDetails.map((education, index) => (
-        <EducationCard key={index} education={education} />
-      ))}
-    </VStack>
-  </Box>
-);
+      {/* Vertical timeline line */}
+      <Box position="absolute" left="50%" top="0" bottom="0" w="2px" bg="#f2c94c" />
+
+      <VStack align="center" spacing={8} position="relative">
+        {allExperiences.map((experience, index) => (
+          <ExperienceCard
+            key={index}
+            experience={experience}
+            isLeft={index % 2 === 0} // Alternate left and right
+          />
+        ))}
+      </VStack>
+    </Box>
+  );
+};
 
 export default ExperienceSection;

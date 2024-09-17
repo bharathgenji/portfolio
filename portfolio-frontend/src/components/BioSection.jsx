@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Flex, Heading, Text, Button, Image } from '@chakra-ui/react';
 import Header from './Header'; 
 import Footer from './Footer'; 
+import RecentPosts from './RecentPosts'; // Import RecentPosts component
 
 const BioSection = () => {
   return (
@@ -22,43 +23,50 @@ const BioSection = () => {
               NICE TO MEET YOU! I’M BHARATH 👋
             </Heading>
             <Text fontSize={['1rem', '1.2rem', '1.5rem']} mt="1.5rem" lineHeight="1.8" color="#e0e0e0">
-              I’m a Data Scientist and Cloud Engineer at XYZ Company, passionate about leveraging data to drive meaningful insights and create innovative solutions.
+              I’m a former Executive Cloud and Engineer at InfoCepts, passionate about leveraging data to drive meaningful insights and create innovative solutions.
             </Text>
             <Text fontSize={['0.9rem', '1rem', '1.2rem']} mt="1rem" color="#c0c0c0">
-              7+ years of experience in software development and data science.
+              2+ years of experience in software development and data science.
             </Text>
-            <Button
-              mt="2rem"
-              colorScheme="yellow"
-              bg="#FFD700"
-              color="black"
-              _hover={{ bg: '#FFC107' }}
-              borderRadius="full"
-              px="2rem"
-              boxShadow="lg"
-              onClick={() => window.open('/resume/Bharath_Genji_Resume.pdf')}
-            >
-              Download Resume
-            </Button>
+            {/* Download Resume Button */}
+            <a href="/resume/Bharath Genji Resume.pdf" download>
+              <Button
+                mt="2rem"
+                colorScheme="yellow"
+                bg="#FFD700"
+                color="black"
+                _hover={{ bg: '#FFC107' }}
+                borderRadius="full"
+                px="2rem"
+                boxShadow="lg"
+              >
+                Download Resume
+              </Button>
+            </a>
           </Box>
 
-{/* Right Section - Enlarged Image */}
-<Box flex="1" textAlign="center">
-          <Image
-            src="/images/bharath.jpg"
-            alt="Bharath Genji"
-            boxSize="350px" // Adjusted size to 350px for better balance
-            borderRadius="full"
-            border="5px solid" // Adjusted border width for better visual balance
-            borderColor="white.400" // Keeping the border color consistent
-            mx="auto"
-          />
-          <Text mt="1rem" fontSize="1.2rem">
-            Data Scientist and Cloud Engineer at XYZ Company
-          </Text>
-        </Box>
-      </Flex>
-    </Box>
+          {/* Right Section */}
+          <Box flex="1" textAlign="center">
+            <Image
+              src="/images/bharath.jpg"
+              alt="Bharath Genji"
+              width={['200px', '250px', '300px']}
+              height="auto"
+              borderRadius="full"
+              border="3px solid"
+              borderColor="#FFFFFF"
+              mx="auto"
+            />
+            <Text mt="1rem" fontSize="1.2rem">
+              Data Science Grad Student at George Washington University
+            </Text>
+          </Box>
+        </Flex>
+      </Box>
+      
+      {/* Include Recent Posts Section */}
+      <RecentPosts />
+      
       <Footer />
     </>
   );
