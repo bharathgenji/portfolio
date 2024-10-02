@@ -1,38 +1,17 @@
 import React from 'react';
-import { Box, Flex, Text, VStack, Divider,Icon } from '@chakra-ui/react';
+import { Box, Flex, Image, Text, VStack, HStack, Divider, UnorderedList, ListItem } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap, FaTrophy, FaBook } from 'react-icons/fa'; // Import icons
-
-// Convert Chakra components to motion-enabled components
-
-
-const educationDetails = [
-  {
-    date: 'Aug 2023 - Present',
-    degree: "Master's Degree, Data Science",
-    institution: 'The George Washington University',
-    location: 'Washington, DC, USA',
-    details: 'Pursuing a Master’s degree in Data Science with a focus on advanced analytics, machine learning, and data-driven decision-making.',
-    icon: '/path/to/george-washington-university-logo.png', // Replace with the actual path to your image
-  },
-  {
-    date: '2017 - 2021',
-    degree: 'Bachelor of Technology (BTech), Computer Science',
-    institution: 'SRM Institute of Science and Technology (SRM IST)',
-    location: 'Chennai, Tamil Nadu, India',
-    details: 'Completed a Bachelor of Technology in Computer Science, focusing on software development, data structures, algorithms, and artificial intelligence.',
-    icon: '/path/to/srm-ist-logo.png', // Replace with the actual path to your image
-  },
-];
+import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 
 
 const professionalExperiences = [
   {
     date: 'June 2024 - August 2024',
-    position: 'CTPO Intern',
+    position: 'AI/ML Engineer Intern',
     company: 'Infotrend',
     location: 'Washington, DC',
     type: 'Professional',
+    logo: '/images/infotrend_inc_logo.jpeg',
     description: [
       'Developed and tested machine learning applications using CTPO Docker environment, enhancing prototyping speed and efficiency.',
       'Authored comprehensive tutorials and documentation to facilitate community understanding and adoption of new technologies.',
@@ -45,6 +24,7 @@ const professionalExperiences = [
     company: 'InfoCepts',
     location: 'Chennai, India',
     type: 'Professional',
+    logo: '/images/Infocepts-Data-AI.png',
     description: [
       'Orchestrated the integration of Flask-Restx API with Azure SQL Server and AI analytics, boosting productivity by 50%.',
       'Standardized version control processes using Bitbucket, reducing code conflicts by 20%.',
@@ -57,6 +37,7 @@ const professionalExperiences = [
     company: 'InfoCepts',
     location: 'Chennai, India',
     type: 'Professional',
+    logo: '/images/Infocepts-Data-AI.png',
     description: [
       'Led modernization of the Order Management System on AWS, reducing manual efforts by 75%.',
       'Developed an Automated Quality Analyzer on Spark, improving data quality assessment processes by 30%.',
@@ -66,9 +47,10 @@ const professionalExperiences = [
   {
     date: 'Mar 2021 - Aug 2021',
     position: 'Big Data Engineer Intern',
-    company: 'Internship',
+    company: 'InfoCepts',
     location: 'India',
     type: 'Professional',
+    logo: '/images/Infocepts-Data-AI.png',
     description: [
       'Worked with HBase, Hive, Kafka, YARN, HDFS, MapReduce, Python, Spark, Microsoft SQL Server, and Unix.',
       'Created an ETL tool to convert semi-structured data to structured data in Spark, load it into respective databases.'
@@ -80,6 +62,7 @@ const professionalExperiences = [
     company: 'DoWell Research',
     location: 'Chennai, Tamil Nadu, India',
     type: 'Professional',
+    logo: '/images/dowell.jpeg',
     description: [
       'Conducted data analysis and research, contributing to the project’s overall findings and recommendations.'
     ],
@@ -90,6 +73,7 @@ const professionalExperiences = [
     company: 'Takenmind Organization',
     location: 'Chennai, Tamil Nadu, India',
     type: 'Professional',
+    logo:'images/takenminds.jpeg',
     description: [
       'Analyzed large datasets and created detailed reports to assist in decision-making processes.'
     ],
@@ -100,6 +84,7 @@ const professionalExperiences = [
     company: 'ChuChu TV Studios',
     location: 'Chennai, Tamil Nadu, India',
     type: 'Professional',
+    logo:'images/chuchutv.jpeg',
     description: [
       'Developed and optimized Android applications to enhance user engagement and satisfaction.'
     ],
@@ -113,6 +98,7 @@ const academicExperiences = [
     company: 'The George Washington University',
     location: 'Washington DC-Baltimore Area, On-site',
     type: 'Academic',
+    logo: '/images/gwu.png',
     description: [
       'Providing technical support to Data Science students, assisting with software installation, troubleshooting, and ensuring seamless access to required tools and resources.',
       'Delivering coding assistance to students within the program, helping them overcome programming challenges while coordinating closely with faculty and Graduate Assistants.',
@@ -127,6 +113,7 @@ const academicExperiences = [
     company: 'The George Washington University',
     location: 'Washington, District of Columbia, United States, On-site',
     type: 'Academic',
+    logo:'/images/gwu.png',
     description: [
       'Assisted in preparing and organizing lecture materials.',
       'Conducted laboratory experiments and ensured a safe, educational environment.',
@@ -142,6 +129,7 @@ const academicExperiences = [
     company: 'The George Washington University',
     location: 'Washington, District of Columbia, United States, On-site',
     type: 'Academic',
+    logo:'/images/gwu.png',
     description: [
       'Managed the front desk, coordinated departmental communications, and assisted in event organization.',
       'Developed key skills in administrative support, customer service, and effective communication, while contributing to the smooth functioning of the department.'
@@ -150,64 +138,88 @@ const academicExperiences = [
 ];
 
 
-const MotionFlex = motion(Flex);
+// Motion settings for scroll animations
+const MotionBox = motion(Box);
 
-// Define ExperienceCard component for timeline
-const ExperienceCard = ({ experience, isLeft }) => (
-  <MotionFlex
-    align="center"
+const ExperienceCard = ({ experience }) => (
+  <MotionBox
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    mb={12}
     p={6}
-    bg="#1a1a1a"
+    bg="rgba(255, 255, 255, 0.05)"
     borderRadius="md"
-    shadow="md"
-    mb={4}
-    position="relative"
-    w={['100%', '45%']}
-    left={isLeft ? '0%' : '55%'}
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, ease: 'easeOut' }}
-    whileHover={{ scale: 1.05 }}
+    shadow="lg"
+    _hover={{
+      transform: 'scale(1.02)',
+      boxShadow: '0px 10px 30px rgba(0,0,0,0.2)',
+    }}
+    width={['100%', '100%', '90%']}
+    maxW="900px"
+    minH="300px" // Consistent card height
+    display="flex"
+    flexDirection="column"
+    justifyContent="space-between"
   >
-    <Box mr={4}>
-      <Icon as={experience.type === 'Professional' ? FaBriefcase : FaGraduationCap} color="#f2c94c" size="24px" />
-    </Box>
-    <Box>
-      <Text fontSize="lg" fontWeight="bold" color="#f2c94c">
-        {experience.position}
-      </Text>
-      <Text color="#ffffff">{experience.company}</Text>
-      <Text color="#a0aec0">{experience.location} | {experience.date}</Text>
+    <Flex align="center" justify="space-between" mb={4}>
+      {/* Company Logo */}
+      <Image
+        src={experience.logo}
+        alt={`${experience.company} logo`}
+        boxSize="80px"
+        borderRadius="full"
+        mr={6}
+      />
+
+      {/* Experience Details */}
+      <VStack align="start" spacing={2} maxW="70%">
+        <Text fontSize="2xl" fontWeight="bold" color="yellow.400">
+          {experience.position}
+        </Text>
+        <Text fontSize="lg" color="white">
+          {experience.company}
+        </Text>
+
+        {/* Location and Date */}
+        <HStack spacing={4}>
+          <HStack spacing={1}>
+            <FaMapMarkerAlt color="#f2c94c" />
+            <Text color="gray.300">{experience.location}</Text>
+          </HStack>
+          <HStack spacing={1}>
+            <FaCalendarAlt color="#f2c94c" />
+            <Text color="gray.300">{experience.date}</Text>
+          </HStack>
+        </HStack>
+      </VStack>
+    </Flex>
+
+    {/* Divider to separate the header from the description */}
+    <Divider borderColor="gray.600" my={4} />
+
+    {/* Description List with Bullet Points */}
+    <UnorderedList spacing={3} color="gray.200" textAlign="justify" pl={6}>
       {experience.description.map((desc, index) => (
-        <Text key={index} mt={2} color="#a0aec0">{desc}</Text>
+        <ListItem key={index}>{desc}</ListItem>
       ))}
-    </Box>
-  </MotionFlex>
+    </UnorderedList>
+  </MotionBox>
 );
 
-const ExperienceSection = () => {
-  const allExperiences = [...professionalExperiences, ...academicExperiences]; // Combine all experiences
+const ExperienceSection = () => (
+  <Box py={16} px={[4, 8]} bg="#1A1A1A" color="#FFFFFF">
+    <Text fontSize="4xl" fontWeight="bold" color="yellow.400" textAlign="center" mb={12}>
+      Professional Experience
+    </Text>
 
-  return (
-    <Box py={16} position="relative">
-      <Text fontSize="3xl" fontWeight="bold" color="#f2c94c" mb={8}>
-        Experience Timeline
-      </Text>
-
-      {/* Vertical timeline line */}
-      <Box position="absolute" left="50%" top="0" bottom="0" w="2px" bg="#f2c94c" />
-
-      <VStack align="center" spacing={8} position="relative">
-        {allExperiences.map((experience, index) => (
-          <ExperienceCard
-            key={index}
-            experience={experience}
-            isLeft={index % 2 === 0} // Alternate left and right
-          />
-        ))}
-      </VStack>
-    </Box>
-  );
-};
+    {/* Experience Cards */}
+    <VStack spacing={8}>
+      {professionalExperiences.map((experience, index) => (
+        <ExperienceCard key={index} experience={experience} />
+      ))}
+    </VStack>
+  </Box>
+);
 
 export default ExperienceSection;

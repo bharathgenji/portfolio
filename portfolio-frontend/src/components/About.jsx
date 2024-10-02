@@ -1,85 +1,101 @@
-import React from 'react';
-import { Box, VStack, Text, Divider, Flex, Icon, useDisclosure, Button } from '@chakra-ui/react';
+// src/components/About.jsx
+import React, { useRef } from 'react';
+import { Box, Text, Flex, Button, Image } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap, FaTrophy, FaBook } from 'react-icons/fa';
-import ExperienceSection from './ExperienceSection'; // Import Experience Section
-import HonorsAwardsSection from './HonorsAwardsSection'; // Import Honors and Awards Section
-import PublicationSection from './PublicationSection'; // Import Publications Section
-
+import { FaUserAlt } from 'react-icons/fa';
+import Header from './Header';
+import Footer from './Footer';
+import ExperienceSection from './ExperienceSection';
+import EducationSection from './EducationSection';
+import PublicationSection from './PublicationSection';
+import CompanyLogoScroller from './CompanyLogoScroller';
 
 // Motion-enabled components
 const MotionBox = motion(Box);
 
-
 const About = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const experienceRef = useRef(null);
+  const educationRef = useRef(null);
+  const publicationsRef = useRef(null);
+
+  const scrollToSection = (section) => {
+    if (section.current) {
+      section.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <Box py={12} px={[4, 8]} bg="#1A1A1A" color="#FFFFFF">
-      {/* Introduction Section */}
-      <MotionBox
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        mb={12}
-        textAlign="center"
-      >
-        <Text fontSize={['3xl', '4xl']} fontWeight="bold" color="#f2c94c">About Me</Text>
-        <Text fontSize={['md', 'lg']} mt={4} mb={8} color="#e0e0e0">
-          I am a Data Scientist and Cloud Engineer based in Washington DC with expertise in developing and deploying data-driven solutions.
-          I specialize in cloud and data engineering, machine learning, and data analytics. I am passionate about leveraging data to drive meaningful insights and create innovative solutions.
-        </Text>
-        <Button onClick={onOpen} colorScheme="yellow" variant="outline" _hover={{ bg: '#f2c94c', color: '#1A1A1A' }}>
-          Learn More
-        </Button>
-      </MotionBox>
+    <>
+      <Header />
 
-      {/* Experience Section */}
+      {/* Full-Screen Intro Section */}
       <MotionBox
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        mb={12}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        bg="#1A1A1A"
+        color="#FFFFFF"
+        height="100vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        textAlign="left"
+        px={[4, 8]}
       >
-        <Flex align="center" mb={4}>
-          <Icon as={FaBriefcase} w={6} h={6} color="#f2c94c" mr={2} />
-          <Text fontSize="2xl" fontWeight="bold" color="#f2c94c">Experience</Text>
+        <Flex maxW="1200px" align="center" justify="space-between">
+          {/* Profile Image */}
+          <Image
+            src="/images/bharath2.jpg"
+            alt="Your Name"
+            borderRadius="full"
+            boxSize="300px"
+            objectFit="cover"
+            mr={[4, 8]}
+            boxShadow="0px 8px 15px rgba(0, 0, 0, 0.5)"
+          />
+          <Box maxW="600px">
+            <Flex alignItems="center" mb={4}>
+              <FaUserAlt size={28} color="#f2c94c" style={{ marginRight: '10px' }} />
+              <Text fontSize={['3xl', '4xl']} fontWeight="bold" color="#f2c94c">
+                About Me
+              </Text>
+            </Flex>
+            <Text fontSize={['md', 'lg']} color="#e0e0e0" mb={6}>
+              I'm a Data Scientist and Cloud Engineer with a passion for solving complex problems and turning data into actionable insights.
+            </Text>
+
+            <Button
+              colorScheme="yellow"
+              variant="outline"
+              _hover={{ bg: '#f2c94c', color: '#1A1A1A' }}
+              onClick={() => scrollToSection(experienceRef)}
+            >
+              Learn More
+            </Button>
+          </Box>
         </Flex>
+
+      </MotionBox>
+      {/* Add the ScrollingLogoScroller here */}
+      <CompanyLogoScroller />
+
+      {/* Experience Timeline Section */}
+      <Box ref={experienceRef} py={12} px={[4, 8]} bg="#1A1A1A" color="#FFFFFF">
         <ExperienceSection />
-      </MotionBox>
+      </Box>
 
-      <Divider my={8} borderColor="#333" />
-
-      {/* Honors & Awards Section */}
-      <MotionBox
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        mb={12}
-      >
-        <Flex align="center" mb={4}>
-          <Icon as={FaTrophy} w={6} h={6} color="#f2c94c" mr={2} />
-          <Text fontSize="2xl" fontWeight="bold" color="#f2c94c">Honors & Awards</Text>
-        </Flex>
-        <HonorsAwardsSection />
-      </MotionBox>
-
-      <Divider my={8} borderColor="#333" />
+      {/* Education Section */}
+      <Box ref={educationRef} py={12} px={[4, 8]} bg="#1A1A1A" color="#FFFFFF">
+        <EducationSection />
+      </Box>
 
       {/* Publications Section */}
-      <MotionBox
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        mb={12}
-      >
-        <Flex align="center" mb={4}>
-          <Icon as={FaBook} w={6} h={6} color="#f2c94c" mr={2} />
-          <Text fontSize="2xl" fontWeight="bold" color="#f2c94c">Publications</Text>
-        </Flex>
+      <Box ref={publicationsRef} py={12} px={[4, 8]} bg="#1A1A1A" color="#FFFFFF">
         <PublicationSection />
-      </MotionBox>
-    </Box>
+      </Box>
+
+      <Footer />
+    </>
   );
 };
 

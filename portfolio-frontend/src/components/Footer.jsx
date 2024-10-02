@@ -1,18 +1,16 @@
 import React from 'react';
-import { Box,Text, Flex, Link, IconButton, Input, Button, Divider } from '@chakra-ui/react';
-import { FaLinkedin, FaGithub, FaEnvelope, FaReddit, FaDiscord, FaPatreon, FaYoutube, FaInstagram } from 'react-icons/fa';
+import { Box, Flex, Link, IconButton, Divider } from '@chakra-ui/react';
+import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
   return (
     <Box bg="secondary" color="white" py={8}>
       {/* Centered Navigation Links */}
       <Flex justify="center" mb={4} fontSize="lg" fontWeight="medium">
-        <Link href="/" mx={4} _hover={{ color: 'primary' }}>About</Link>
+        <Link href="/about" mx={4} _hover={{ color: 'primary' }}>About</Link>
         <Link href="/blog" mx={4} _hover={{ color: 'primary' }}>Blog</Link>
         <Link href="/contact" mx={4} _hover={{ color: 'primary' }}>Contact</Link>
-        <Link href="/mentoring" mx={4} _hover={{ color: 'primary' }}>Mentoring</Link>
         <Link href="/portfolio" mx={4} _hover={{ color: 'primary' }}>Portfolio</Link>
-        <Link href="/speaking" mx={4} _hover={{ color: 'primary' }}>Speaking</Link>
       </Flex>
 
       {/* Horizontal Divider */}
@@ -54,9 +52,7 @@ const Footer = () => {
             size="lg"
             mx={2}
           />
-          
         </Flex>
-
       </Flex>
     </Box>
   );

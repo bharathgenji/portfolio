@@ -2,7 +2,9 @@ import React from 'react';
 import { Box, Flex, Heading, Text, Button, Image } from '@chakra-ui/react';
 import Header from './Header'; 
 import Footer from './Footer'; 
-import RecentPosts from './RecentPosts'; // Import RecentPosts component
+import RecentPosts from './RecentPosts';
+
+
 
 const BioSection = () => {
   return (
@@ -29,7 +31,7 @@ const BioSection = () => {
               2+ years of experience in software development and data science.
             </Text>
             {/* Download Resume Button */}
-            <a href="/resume/Bharath Genji Resume.pdf" download>
+            <a href="/resume/Bharath Genji Resume (2).pdf" download>
               <Button
                 mt="2rem"
                 colorScheme="yellow"
