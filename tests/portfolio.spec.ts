@@ -118,17 +118,18 @@ test.describe("Portfolio — quality", () => {
   });
 
   test("visual snapshots (desktop + mobile)", async ({ page }) => {
+    test.setTimeout(90_000);
     // Scroll-reveal animations fire on scroll, so walk the page to trigger them
     // before the full-page capture, otherwise sections render blank.
     const triggerReveals = async () => {
       await page.evaluate(async () => {
-        const step = window.innerHeight * 0.4;
+        const step = window.innerHeight * 0.75;
         for (let y = 0; y <= document.body.scrollHeight; y += step) {
           window.scrollTo(0, y);
-          await new Promise((r) => setTimeout(r, 320));
+          await new Promise((r) => setTimeout(r, 200));
         }
       });
-      await page.waitForTimeout(600);
+      await page.waitForTimeout(500);
     };
 
     await page.setViewportSize({ width: 1280, height: 900 });

@@ -40,6 +40,28 @@ to update the site.
 Your résumé PDF is served from `public/bharath-resume.pdf` — replace that file to
 update the download.
 
+## The `/lab` playground (live document extraction)
+
+The **`~/lab`** section runs a real Gemini agent that classifies a pasted
+document and extracts structured fields + entities. It needs one env var:
+
+```bash
+# .env.local  (gitignored)
+GEMINI_API_KEY=...   # free key, no card: https://aistudio.google.com/apikey
+```
+
+Without the key the playground still renders and shows a friendly "not
+configured" message — everything else on the site works regardless.
+
+On Vercel, add the same variable:
+
+```bash
+vercel env add GEMINI_API_KEY production   # paste the key when prompted
+vercel --prod                              # redeploy to pick it up
+```
+
+(or add it under **Project → Settings → Environment Variables** in the dashboard.)
+
 ## Deploy to Vercel (free)
 
 ### Option A — GitHub + Vercel dashboard (recommended, auto-deploys on push)

@@ -4,6 +4,7 @@ import NowSection from "@/components/NowSection";
 import WorkSection from "@/components/WorkSection";
 import StackSection from "@/components/StackSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import LabSection from "@/components/LabSection";
 import NewsSection from "@/components/NewsSection";
 import Footer from "@/components/Footer";
 
@@ -17,6 +18,7 @@ export default function Home() {
         <WorkSection />
         <StackSection />
         <ProjectsSection />
+        <LabSection />
         <NewsSection />
       </main>
       <Footer />

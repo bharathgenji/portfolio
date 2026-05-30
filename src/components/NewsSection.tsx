@@ -5,7 +5,7 @@ export default function NewsSection() {
   return (
     <section id="news" className="mx-auto max-w-5xl scroll-mt-24 px-5 py-20 sm:px-6">
       <SectionHeading
-        index="05"
+        index="06"
         kicker="~/news --live"
         title="The wire"
         titleAccent="24/7"

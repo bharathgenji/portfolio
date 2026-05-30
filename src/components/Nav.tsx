@@ -8,6 +8,7 @@ const LINKS = [
   { id: "work", label: "work" },
   { id: "stack", label: "stack" },
   { id: "projects", label: "projects" },
+  { id: "lab", label: "lab" },
   { id: "news", label: "news" },
 ];
 
@@ -61,7 +62,7 @@ export default function Nav() {
             <li key={id}>
               <a
                 href={`#${id}`}
-                className={`relative rounded-full px-2.5 py-1.5 transition-colors sm:px-3 ${
+                className={`relative rounded-full px-1.5 py-1.5 transition-colors sm:px-3 ${
                   active === id ? "text-[#07080a]" : "text-muted hover:text-text"
                 }`}
               >

@@ -11,6 +11,7 @@
     "test:report": "playwright show-report"
   },
   "dependencies": {
+    "@google/genai": "^2.7.0",
     "fast-xml-parser": "^5.8.0",
     "motion": "^12.40.0",
     "next": "16.2.6",
