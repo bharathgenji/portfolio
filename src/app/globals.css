@@ -201,6 +201,79 @@ body > *:not(.grain) {
   50% { transform: translateY(-6px); }
 }
 
+/* ─────────────────────── Markdown posts (.post) ─────────────────────── */
+.post {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+.post > * + * {
+  margin-top: 1.15rem;
+}
+.post h2 {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  line-height: 1.15;
+  color: var(--text);
+  margin-top: 2.4rem;
+}
+.post h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text);
+  margin-top: 1.8rem;
+}
+.post p { color: var(--text-dim); }
+.post strong { color: var(--text); font-weight: 600; }
+.post a {
+  color: var(--lime);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in oklab, var(--lime) 40%, transparent);
+}
+.post ul, .post ol { padding-left: 1.3rem; }
+.post ul { list-style: none; }
+.post ul > li { position: relative; }
+.post ul > li::before {
+  content: "▹";
+  position: absolute;
+  left: -1.3rem;
+  color: var(--lime-deep);
+}
+.post ol { list-style: decimal; }
+.post li + li { margin-top: 0.5rem; }
+.post code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 0.12em 0.4em;
+  color: var(--mint);
+}
+.post pre {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+.post pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: var(--text-dim);
+  font-size: inherit;
+}
+.post blockquote {
+  border-left: 2px solid var(--lime-deep);
+  padding-left: 1rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,

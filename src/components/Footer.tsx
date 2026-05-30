@@ -4,6 +4,7 @@ const links = [
   { label: "email", href: `mailto:${profile.email}` },
   { label: "linkedin", href: profile.linkedin },
   { label: "github", href: profile.github },
+  { label: "playbook", href: "/playbook" },
   { label: "résumé", href: profile.resume },
 ];
 

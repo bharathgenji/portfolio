@@ -6,6 +6,7 @@ import StackSection from "@/components/StackSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import LabSection from "@/components/LabSection";
 import NewsSection from "@/components/NewsSection";
+import PlaybookTeaser from "@/components/PlaybookTeaser";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <ProjectsSection />
         <LabSection />
         <NewsSection />
+        <PlaybookTeaser />
       </main>
       <Footer />
     </>
