@@ -32,15 +32,10 @@ const title = frontmatter(raw, "title") || SLUG;
 const summary = frontmatter(raw, "summary") || "";
 
 const text =
-  `📝 *New Playbook draft*\n\n` +
-  `*${escapeMd(title)}*\n` +
-  `${escapeMd(summary)}\n\n` +
-  `_Approve to publish to your site, or reject to discard._`;
-
-function escapeMd(s) {
-  // MarkdownV2 escaping
-  return s.replace(/([_*\[\]()~`>#+\-=|{}.!\\])/g, "\\$1");
-}
+  `📝 New Playbook draft\n\n` +
+  `${title}\n` +
+  `${summary}\n\n` +
+  `Approve to publish it to your site, or reject to discard.`;
 
 const res = await fetch(
   `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
@@ -50,7 +45,6 @@ const res = await fetch(
     body: JSON.stringify({
       chat_id: TELEGRAM_CHAT_ID,
       text,
-      parse_mode: "MarkdownV2",
       reply_markup: {
         inline_keyboard: [
           [
