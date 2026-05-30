@@ -113,7 +113,10 @@ export async function POST(req: Request) {
         responseMimeType: "application/json",
         responseSchema,
         temperature: 0.2,
-        maxOutputTokens: 1200,
+        maxOutputTokens: 2048,
+        // 2.5 Flash "thinks" by default, which would consume the output budget
+        // before the JSON is emitted. Extraction doesn't need it.
+        thinkingConfig: { thinkingBudget: 0 },
       },
     });
     const latencyMs = Date.now() - started;
@@ -133,6 +136,7 @@ export async function POST(req: Request) {
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Extraction failed.";
+    console.error("[/api/extract]", message);
     // Surface quota/key errors distinctly so the UI can be helpful.
     const isQuota = /quota|rate|429|RESOURCE_EXHAUSTED/i.test(message);
     return Response.json(
