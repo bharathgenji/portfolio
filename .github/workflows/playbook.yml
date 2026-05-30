@@ -7,7 +7,10 @@ name: Playbook draft
 
 on:
   schedule:
-    - cron: "0 14 * * 1" # Mondays 14:00 UTC
+    # Daily at 00:00 UTC = 7:00 PM Houston/Central (CDT, UTC-5).
+    # Note: GitHub cron is UTC and does NOT follow DST — in winter (CST, UTC-6)
+    # this fires at 6:00 PM Central. Change to "0 1 * * *" to keep it 7 PM in winter.
+    - cron: "0 0 * * *"
   workflow_dispatch: {} # manual "Run workflow" button
 
 permissions:
