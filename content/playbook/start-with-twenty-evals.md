@@ -3,7 +3,7 @@ title: "Your agent needs a test suite. Start with 20 examples."
 date: "2026-05-29"
 summary: "You wouldn't ship code without tests. Don't ship an agent without evals — and you can bootstrap a useful eval set in an afternoon."
 tags: ["agents", "evals", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
