@@ -1,0 +1,66 @@
+name: Playbook draft
+
+# Drafts a new Playbook post using Claude Code on Bharath's Max subscription
+# (CLAUDE_CODE_OAUTH_TOKEN — NOT an API key), commits it as status:draft, and
+# pings Telegram with Approve/Reject buttons. Approving (via the Vercel webhook)
+# flips it to published. Runs weekly + on-demand.
+
+on:
+  schedule:
+    - cron: "0 14 * * 1" # Mondays 14:00 UTC
+  workflow_dispatch: {} # manual "Run workflow" button
+
+permissions:
+  contents: write
+
+concurrency:
+  group: playbook-draft
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Draft a post (Claude Code, subscription auth)
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          PROMPT="$(cat scripts/playbook-prompt.md)
+
+          Today is $(date -u +%F)."
+          claude -p "$PROMPT" \
+            --allowedTools "Read,Glob,Write,Edit" \
+            --permission-mode acceptEdits
+
+      - name: Identify the new draft
+        id: draft
+        run: |
+          file=$(git ls-files --others --exclude-standard content/playbook | head -1)
+          if [ -z "$file" ]; then echo "No new draft was created."; exit 1; fi
+          slug=$(basename "$file" .md)
+          echo "slug=$slug" >> "$GITHUB_OUTPUT"
+          echo "Created: $file (slug=$slug)"
+
+      - name: Commit the draft
+        run: |
+          git config user.name "playbook-bot"
+          git config user.email "playbook-bot@users.noreply.github.com"
+          git add content/playbook
+          git commit -m "playbook: draft '${{ steps.draft.outputs.slug }}' (pending approval)"
+          git push
+
+      - name: Notify Telegram for approval
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SLUG: ${{ steps.draft.outputs.slug }}
+        run: node scripts/notify-telegram.mjs

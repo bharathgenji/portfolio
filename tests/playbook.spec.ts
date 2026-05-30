@@ -29,4 +29,13 @@ test.describe("Playbook", () => {
     await section.getByRole("link", { name: /all posts/i }).click();
     await expect(page).toHaveURL(/\/playbook$/);
   });
+
+  test("approval webhook responds gracefully (no 500)", async ({ request }) => {
+    const res = await request.post("/api/playbook", {
+      data: { callback_query: { id: "1", data: "pub:x", message: { message_id: 1, chat: { id: 1 } } } },
+    });
+    // 503 not_configured locally, 401 if a webhook secret is set, 200 once live.
+    // The point: it handles the request deliberately rather than crashing (500/502).
+    expect([200, 401, 503]).toContain(res.status());
+  });
 });
