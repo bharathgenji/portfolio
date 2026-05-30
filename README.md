@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bharath Genji Mohanaranga — Portfolio
 
-## Getting Started
+A terminal-themed portfolio + **live AI/tech news feed**, built with Next.js and
+deployed free on Vercel.
 
-First, run the development server:
+- **Live news** is pulled client-side from the [Algolia Hacker News API](https://hn.algolia.com/api)
+  (no API key, no backend, free forever) and auto-refreshes every 90 seconds, so
+  the feed stays current 24/7 with zero maintenance.
+- **Fully static** output — costs nothing to host and loads instantly.
+
+## Tech stack
+
+| Layer       | Choice                                  |
+| ----------- | --------------------------------------- |
+| Framework   | Next.js 16 (App Router) + TypeScript    |
+| Styling     | Tailwind CSS v4                         |
+| Animation   | Motion (framer-motion)                  |
+| Font        | JetBrains Mono                          |
+| News source | Algolia Hacker News API (client-side)   |
+| Hosting     | Vercel (free Hobby tier)                |
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Editing your content
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Almost everything lives in **`src/lib/data.ts`** — your summary, current work,
+job history, skills, projects, education, and contact links. Edit that one file
+to update the site.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> ⚠️ **Before deploying, set your real links** in `src/lib/data.ts`:
+> `profile.linkedin` and `profile.github` are currently placeholders.
 
-## Learn More
+Your résumé PDF is served from `public/bharath-resume.pdf` — replace that file to
+update the download.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy to Vercel (free)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Option A — GitHub + Vercel dashboard (recommended, auto-deploys on push)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create a new repo on GitHub (e.g. `bharath-portfolio`).
+2. Push this project:
+   ```bash
+   git add .
+   git commit -m "Portfolio + live AI news"
+   git branch -M main
+   git remote add origin https://github.com/<you>/bharath-portfolio.git
+   git push -u origin main
+   ```
+3. Go to [vercel.com/new](https://vercel.com/new), import the repo, and click
+   **Deploy**. Vercel auto-detects Next.js — no config needed.
+4. Every `git push` now redeploys automatically.
 
-## Deploy on Vercel
+### Option B — Vercel CLI
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm i -g vercel
+vercel          # preview deploy
+vercel --prod   # production deploy
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+You'll get a free `*.vercel.app` URL. Add a custom domain later in the Vercel
+dashboard if you want (the `.vercel.app` URL is free and permanent).
+
+## How the live news works
+
+`src/lib/hn.ts` queries the Algolia HN search endpoint for several AI/tech terms
+(`AI`, `LLM`, `GPT`, `machine learning`, `agents`), merges + dedupes the results,
+and sorts newest-first. `src/components/NewsFeed.tsx` fetches on mount and on a
+90-second interval, with loading/error/offline states and a manual refresh.
+
+Because it reads the live Hacker News index directly from the browser, there's
+nothing to keep running — it's always up to date whenever anyone visits.
