@@ -3,7 +3,7 @@ title: "Agents fail mid-run. Make your actions idempotent."
 date: "2026-05-30"
 summary: "A transient error at step 4 of 7 shouldn't charge a customer twice or send the same email three times — but it will, unless you build for it."
 tags: ["agents", "reliability", "production"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
