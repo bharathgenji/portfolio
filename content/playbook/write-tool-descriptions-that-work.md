@@ -3,7 +3,7 @@ title: "Write tool descriptions that actually get used"
 date: "2026-05-31"
 summary: "The model decides whether to call your tool based on its description. A vague description is a bug."
 tags: ["agents", "tool-calling", "patterns"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
