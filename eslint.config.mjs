@@ -16,6 +16,8 @@ const eslintConfig = defineConfig([
     "test-results/**",
     "playwright-report/**",
     "playwright/.cache/**",
+    // Standalone Node CLI (not part of the Next app)
+    "tutor/**",
   ]),
 ]);
 
