@@ -1,6 +1,21 @@
 #!/usr/bin/env node
-// learn-agent — an adaptive tutor that takes you from zero to your target level
-// on ANY topic. Iteration 1: diagnose → assess → plan.
+// learn-agent — an adaptive multi-agent tutor that takes you from zero to your
+// target level on ANY topic.
+import fs from "node:fs";
+
+// Convenience: load GEMINI_API_KEY (etc.) from .env.local / .env in the current
+// directory if not already set, so `npm run tutor` just works.
+for (const f of [".env.local", ".env"]) {
+  try {
+    for (const ln of fs.readFileSync(f, "utf8").split("\n")) {
+      const m = ln.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/);
+      if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
+    }
+  } catch {
+    /* no env file — rely on the shell environment */
+  }
+}
+
 import { c, line, banner, rule, prompt, choose, spinnerStart, closeUI } from "./lib/ui.mjs";
 import * as store from "./lib/store.mjs";
 import { review as srsReview, dueCards } from "./lib/srs.mjs";
