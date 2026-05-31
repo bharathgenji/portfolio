@@ -33,8 +33,8 @@ A small fleet of specialized agents, orchestrated by the CLI:
 | **Diagnostician** | Asks adaptive questions to gauge your current understanding |
 | **Assessor** | Scores your level and pinpoints known concepts vs. gaps |
 | **Curriculum Planner** | Designs an ordered path from where you are → your goal |
-| **Tutor** | Teaches each module (roadmap) |
-| **Flashcards + SM-2** | Generates cards and schedules spaced review (roadmap) |
+| **Tutor** | Teaches each module with analogies, examples, a check question |
+| **Flashcards + SM-2** | Generates cards and schedules spaced review |
 
 ## Config
 
@@ -44,9 +44,17 @@ A small fleet of specialized agents, orchestrated by the CLI:
 The LLM provider lives in one file (`lib/provider.mjs`) — swap it to target
 Claude or OpenAI without touching the rest.
 
+## Commands
+
+```bash
+tutor learn "<topic>"     # diagnose & plan, then teach the next lesson each run
+tutor review "<topic>"    # spaced-repetition review of due flashcards
+tutor list                # topics & progress
+```
+
 ## Roadmap
 
 - [x] Diagnose → assess → personalized curriculum
-- [ ] Teach modules + auto-generated flashcards (SM-2 spaced repetition)
+- [x] Teach modules + auto-generated flashcards (SM-2 spaced repetition) + `review`
 - [ ] Per-module assessments, mastery tracking, adaptive re-planning
-- [ ] `review` / `status` commands
+- [ ] `status` command + portfolio showcase page

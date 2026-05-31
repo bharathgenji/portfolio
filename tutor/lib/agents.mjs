@@ -115,7 +115,7 @@ Design the curriculum.`,
   }));
 }
 
-// ── Tutor (teaching) — used in iteration 2, included now ─────────────────────
+// ── Tutor (teaching) ─────────────────────────────────────────────────────────
 export async function teachModule(topic, module, level) {
   return askText({
     system:
@@ -123,4 +123,34 @@ export async function teachModule(topic, module, level) {
     user: `Topic: "${topic}". Learner level: ${level}. Teach this module:\nTitle: ${module.title}\nFocus: ${module.summary}`,
     temperature: 0.6,
   });
+}
+
+// ── Flashcard generator ──────────────────────────────────────────────────────
+const FLASHCARDS_SCHEMA = {
+  type: Type.OBJECT,
+  properties: {
+    cards: {
+      type: Type.ARRAY,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          front: { type: Type.STRING, description: "a question testing one idea" },
+          back: { type: Type.STRING, description: "the concise, correct answer" },
+        },
+        required: ["front", "back"],
+      },
+    },
+  },
+  required: ["cards"],
+};
+
+export async function generateFlashcards(topic, module, level) {
+  const { cards } = await askJSON({
+    system:
+      "You create high-quality spaced-repetition flashcards. Each card tests exactly ONE idea: a clear question on the front, a concise correct answer on the back. Favor understanding (why/how) over rote facts. Avoid yes/no. Make 4–6 cards.",
+    user: `Topic: "${topic}". Learner level: ${level}. Module: "${module.title}" — ${module.summary}. Create the flashcards.`,
+    schema: FLASHCARDS_SCHEMA,
+    temperature: 0.4,
+  });
+  return cards ?? [];
 }
