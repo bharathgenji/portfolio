@@ -4,8 +4,12 @@ An adaptive, multi-agent tutor that takes you from zero to your target level on
 **any** topic — right in your terminal.
 
 It diagnoses what you already know by asking the right questions, sets a goal
-with you, then builds a personalized curriculum. (Teaching, spaced-repetition
-flashcards, and mastery assessments are landing iteratively — see roadmap.)
+with you, builds a personalized curriculum, teaches it, and drills you with
+spaced-repetition flashcards and graded mastery checks.
+
+**Prefer a browser?** There's a hosted web version (diagnose → plan → teach →
+flashcards) at **/tutor** on the portfolio — no install, progress saved locally.
+This CLI is the full-featured version (adds graded assessments + mastery loop).
 
 ## Quick start
 

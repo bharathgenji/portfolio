@@ -5,7 +5,7 @@ const links = [
   { label: "linkedin", href: profile.linkedin },
   { label: "github", href: profile.github },
   { label: "playbook", href: "/playbook" },
-  { label: "tutor", href: "/learn" },
+  { label: "tutor", href: "/tutor" },
   { label: "résumé", href: profile.resume },
 ];
 

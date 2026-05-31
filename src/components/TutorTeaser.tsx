@@ -37,8 +37,14 @@ export default function TutorTeaser() {
 
           <div className="mt-7 flex flex-wrap gap-3">
             <Link
-              href="/learn"
+              href="/tutor"
               className="inline-flex items-center gap-2 rounded-full bg-lime px-5 py-2.5 text-sm font-semibold text-[#07080a] transition-transform hover:-translate-y-0.5"
+            >
+              ▶ try it live
+            </Link>
+            <Link
+              href="/learn"
+              className="inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-2.5 text-sm text-text-dim transition-colors hover:border-lime hover:text-lime"
             >
               how it works →
             </Link>
@@ -46,7 +52,7 @@ export default function TutorTeaser() {
               href={`${profile.github}/portfolio/tree/main/tutor`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-2.5 text-sm text-text-dim transition-colors hover:border-lime hover:text-lime"
+              className="inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-sm text-muted transition-colors hover:text-text"
             >
               ❮❯ source
             </a>

@@ -53,19 +53,25 @@ export default function LearnPage() {
           repetition + mastery checks.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href="/tutor"
+            className="inline-flex items-center gap-2 rounded-full bg-lime px-5 py-2.5 text-sm font-semibold text-[#07080a] transition-transform hover:-translate-y-0.5"
+          >
+            ▶ try it live
+          </Link>
           <a
             href={REPO}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-lime px-5 py-2.5 text-sm font-semibold text-[#07080a] transition-transform hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-2.5 text-sm text-text-dim transition-colors hover:border-lime hover:text-lime"
           >
-            ❮❯ source on GitHub
+            ❮❯ source
           </a>
           <a
             href="#run"
-            className="inline-flex items-center gap-2 rounded-full border border-line-strong px-5 py-2.5 text-sm text-text-dim transition-colors hover:border-lime hover:text-lime"
+            className="inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-sm text-muted transition-colors hover:text-text"
           >
-            how to run →
+            run in terminal →
           </a>
         </div>
       </header>
