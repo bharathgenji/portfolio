@@ -10,8 +10,13 @@ test.describe("Tutor showcase (/learn)", () => {
     await expect(page.getByText(/Diagnostician/).first()).toBeVisible();
     // run instructions + source link
     await expect(page.locator(".post code").first()).toBeVisible();
-    const src = page.getByRole("link", { name: /source on github/i }).first();
+    const src = page.getByRole("link", { name: /^❮❯ source$/i }).first();
     await expect(src).toHaveAttribute("href", /github\.com\/.*\/portfolio\/tree\/main\/tutor/);
+    // and the live launch link
+    await expect(page.getByRole("link", { name: /try it live/i }).first()).toHaveAttribute(
+      "href",
+      /\/tutor$/,
+    );
   });
 
   test("homepage teaser links to /learn", async ({ page }) => {

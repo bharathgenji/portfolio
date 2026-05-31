@@ -7,9 +7,10 @@ It diagnoses what you already know by asking the right questions, sets a goal
 with you, builds a personalized curriculum, teaches it, and drills you with
 spaced-repetition flashcards and graded mastery checks.
 
-**Prefer a browser?** There's a hosted web version (diagnose → plan → teach →
-flashcards) at **/tutor** on the portfolio — no install, progress saved locally.
-This CLI is the full-featured version (adds graded assessments + mastery loop).
+**Prefer a browser?** There's a hosted web version with the full loop
+(diagnose → plan → teach → flashcards → graded mastery checks) at **/tutor** on
+the portfolio — no install, progress saved in your browser. This CLI is the
+terminal-native version with the same loop and on-disk persistence.
 
 ## Quick start
 

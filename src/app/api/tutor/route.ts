@@ -213,6 +213,15 @@ export async function POST(req: Request) {
         );
         return Response.json(out);
       }
+      case "exam": {
+        const out = await askJSON(
+          "You write a short mastery check for ONE module. 4 open-ended questions that test real understanding and application (not trivia recall), ordered easy → hard. One sentence each.",
+          `Topic: "${topic}". Learner level: ${level}. Module: "${clip(body.module?.title)}" — ${clip(body.module?.summary)}.`,
+          QUESTIONS,
+          0.4,
+        );
+        return Response.json(out);
+      }
       case "grade": {
         const out = await askJSON(
           "You grade answers to a module mastery check. Be fair, award partial credit. Per answer: verdict (correct/partial/incorrect), 0–1 score, short feedback that teaches. Then overallScore (average) + one-line summary. 'No answer' scores 0.",

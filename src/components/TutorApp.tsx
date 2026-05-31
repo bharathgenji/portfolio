@@ -18,7 +18,16 @@ import {
   callTutor,
 } from "@/lib/tutorClient";
 
-type Phase = "intro" | "diagnose" | "goal" | "dashboard" | "lesson" | "review";
+type Phase = "intro" | "diagnose" | "goal" | "dashboard" | "lesson" | "review" | "assess";
+
+const MASTERY_PASS = 0.8;
+const DONE = new Set(["mastered", "known"]);
+
+type GradeResult = {
+  overallScore: number;
+  summary: string;
+  results: { verdict: string; score: number; feedback: string }[];
+};
 
 const TARGETS = [
   { key: "curious", label: "Curious", sub: "the gist & big ideas" },
@@ -45,6 +54,9 @@ export default function TutorApp() {
   const [queue, setQueue] = useState<Card[]>([]);
   const [qi, setQi] = useState(0);
   const [revealed, setRevealed] = useState(false);
+  const [exam, setExam] = useState<{ id: string; question: string }[]>([]);
+  const [examAnswers, setExamAnswers] = useState<Record<string, string>>({});
+  const [grade, setGrade] = useState<GradeResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [busy, setBusy] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -61,6 +73,10 @@ export default function TutorApp() {
     () => state?.curriculum.find((m) => m.status === "todo") || null,
     [state],
   );
+  const reached = useMemo(() => {
+    const core = state?.curriculum.filter((m) => m.priority === "core") ?? [];
+    return core.length > 0 && core.every((m) => DONE.has(m.status));
+  }, [state]);
 
   function persist(next: TutorState) {
     setState(next);
@@ -126,15 +142,15 @@ export default function TutorApp() {
     });
   }
 
-  function learnNext() {
-    if (!state || !nextModule) return;
+  function learnModule(mod: Module) {
+    if (!state) return;
     run("Preparing your lesson…", async () => {
       const { text } = await callTutor("teach", {
         topic: state.topic,
-        module: nextModule,
+        module: mod,
         level: state.assessment?.level,
       });
-      setActiveModule(nextModule);
+      setActiveModule(mod);
       setLesson(text);
       setPhase("lesson");
     });
@@ -192,6 +208,53 @@ export default function TutorApp() {
     } else {
       setPhase("dashboard");
     }
+  }
+
+  function assessModule(mod: Module) {
+    if (!state) return;
+    run("Writing your mastery check…", async () => {
+      const { questions: qs } = await callTutor("exam", {
+        topic: state.topic,
+        module: mod,
+        level: state.assessment?.level,
+      });
+      setActiveModule(mod);
+      setExam(qs || []);
+      setExamAnswers({});
+      setGrade(null);
+      setPhase("assess");
+    });
+  }
+
+  function submitAssess() {
+    if (!state || !activeModule) return;
+    const qa = exam.map((q) => ({ question: q.question, answer: examAnswers[q.id] || "" }));
+    run("Grading your answers…", async () => {
+      const g = (await callTutor("grade", {
+        topic: state.topic,
+        module: activeModule,
+        qa,
+      })) as GradeResult;
+      const score = g.overallScore ?? 0;
+      const curriculum = state.curriculum.map((m) =>
+        m.id === activeModule.id
+          ? {
+              ...m,
+              mastery: Math.round(score * 100) / 100,
+              status: score >= MASTERY_PASS ? ("mastered" as const) : m.status,
+            }
+          : m,
+      );
+      persist({ ...state, curriculum });
+      setGrade(g);
+    });
+  }
+
+  function finishAssess() {
+    setGrade(null);
+    setExam([]);
+    setActiveModule(null);
+    setPhase("dashboard");
   }
 
   function reset() {
@@ -365,60 +428,80 @@ export default function TutorApp() {
           {/* ── dashboard ── */}
           {phase === "dashboard" && state && (
             <div>
+              {reached && (
+                <div className="mb-5 rounded-xl border border-lime-deep/40 bg-lime/10 p-4 text-sm text-lime">
+                  🎉 You&apos;ve reached <b>{state.targetLevel}</b> on {state.topic} — every
+                  core module mastered. Keep reviewing to make it stick.
+                </div>
+              )}
               <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
                 <div className="kicker">curriculum → {state.targetLevel}</div>
                 <div className="font-mono text-xs text-muted">
-                  {state.curriculum.filter((m) => m.status !== "todo").length}/
-                  {state.curriculum.length} started · {due.length} cards due
+                  {state.curriculum.filter((m) => DONE.has(m.status)).length}/
+                  {state.curriculum.length} mastered · {due.length} due
                 </div>
               </div>
 
               <div className="space-y-2">
-                {state.curriculum.map((m, i) => {
-                  const icon =
-                    m.status === "mastered" || m.status === "known"
-                      ? "●"
-                      : m.status === "learning"
-                        ? "◐"
-                        : "○";
-                  const col =
-                    m.status === "learning"
-                      ? "text-amber"
-                      : m.status === "todo"
-                        ? "text-faint"
-                        : "text-lime";
+                {state.curriculum.map((m) => {
+                  const mastered = DONE.has(m.status);
+                  const icon = mastered ? "●" : m.status === "learning" ? "◐" : "○";
+                  const col = mastered ? "text-lime" : m.status === "learning" ? "text-amber" : "text-faint";
+                  const fill = Math.max(0, Math.min(10, Math.round((m.mastery || 0) * 10)));
                   return (
                     <div
                       key={m.id}
-                      className="flex items-start gap-3 rounded-lg border border-line bg-bg-elev/50 px-3 py-2.5"
+                      className="flex items-center gap-3 rounded-lg border border-line bg-bg-elev/50 px-3 py-2.5"
                     >
-                      <span className={`mt-0.5 font-mono ${col}`}>{icon}</span>
+                      <span className={`font-mono ${col}`}>{icon}</span>
                       <div className="min-w-0 flex-1">
-                        <div className="text-sm text-text">
+                        <div className="truncate text-sm text-text">
                           {m.title}{" "}
                           <span className="font-mono text-[10px] text-faint">[{m.priority}]</span>
                         </div>
-                        <div className="text-xs text-muted">{m.summary}</div>
+                        <div className="truncate text-xs text-muted">{m.summary}</div>
+                        {(m.status === "learning" || mastered) && (
+                          <div className="mt-1 font-mono text-[10px]">
+                            <span className="text-lime">{"█".repeat(fill)}</span>
+                            <span className="text-faint">
+                              {"░".repeat(10 - fill)} {Math.round((m.mastery || 0) * 100)}%
+                            </span>
+                          </div>
+                        )}
                       </div>
-                      <span className="font-mono text-[10px] text-faint">{String(i + 1).padStart(2, "0")}</span>
+                      {m.status === "todo" && (
+                        <button
+                          onClick={() => learnModule(m)}
+                          disabled={loading}
+                          className="shrink-0 rounded-md border border-line-strong px-3 py-1 font-mono text-xs text-text-dim transition-colors enabled:hover:border-lime enabled:hover:text-lime disabled:opacity-40"
+                        >
+                          learn
+                        </button>
+                      )}
+                      {m.status === "learning" && (
+                        <button
+                          onClick={() => assessModule(m)}
+                          disabled={loading}
+                          className="shrink-0 rounded-md border border-amber/40 px-3 py-1 font-mono text-xs text-amber transition-colors enabled:hover:bg-amber/10 disabled:opacity-40"
+                        >
+                          assess
+                        </button>
+                      )}
+                      {mastered && <span className="shrink-0 font-mono text-xs text-lime">✓</span>}
                     </div>
                   );
                 })}
               </div>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                {nextModule ? (
+                {nextModule && (
                   <button
-                    onClick={learnNext}
+                    onClick={() => learnModule(nextModule)}
                     disabled={loading}
                     className="rounded-lg bg-lime px-5 py-2.5 text-sm font-semibold text-[#07080a] enabled:hover:-translate-y-0.5 disabled:opacity-40"
                   >
-                    ▶ teach me: {nextModule.title.slice(0, 28)}
+                    ▶ next lesson
                   </button>
-                ) : (
-                  <span className="rounded-lg border border-lime-deep/40 bg-lime/10 px-4 py-2.5 text-sm text-lime">
-                    🎉 all modules taught
-                  </span>
                 )}
                 <button
                   onClick={startReview}
@@ -428,6 +511,91 @@ export default function TutorApp() {
                   ↻ review {due.length} card{due.length === 1 ? "" : "s"}
                 </button>
               </div>
+              {Busy}
+              {Err}
+            </div>
+          )}
+
+          {/* ── assess ── */}
+          {phase === "assess" && activeModule && (
+            <div>
+              <div className="mb-2 flex items-center justify-between">
+                <div className="kicker">mastery check · {activeModule.title}</div>
+                <button onClick={finishAssess} className="font-mono text-xs text-muted hover:text-lime">
+                  ✕ exit
+                </button>
+              </div>
+
+              {!grade ? (
+                <>
+                  <p className="mb-4 text-sm text-muted">
+                    Answer in your own words — this decides if the module is mastered.
+                  </p>
+                  <div className="space-y-4">
+                    {exam.map((q, i) => (
+                      <div key={q.id}>
+                        <label className="text-sm text-text-dim">
+                          <span className="mr-2 font-mono text-faint">{String(i + 1).padStart(2, "0")}</span>
+                          {q.question}
+                        </label>
+                        <textarea
+                          value={examAnswers[q.id] || ""}
+                          onChange={(e) => setExamAnswers({ ...examAnswers, [q.id]: e.target.value })}
+                          rows={2}
+                          className="mt-1.5 w-full resize-none rounded-lg border border-line bg-bg-elev px-3 py-2 font-mono text-[13px] text-text outline-none focus:border-lime"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <button
+                    onClick={submitAssess}
+                    disabled={loading}
+                    className="mt-5 rounded-lg bg-lime px-5 py-2.5 text-sm font-semibold text-[#07080a] enabled:hover:-translate-y-0.5 disabled:opacity-40"
+                  >
+                    submit for grading →
+                  </button>
+                </>
+              ) : (
+                <div>
+                  <div
+                    className={`mb-4 rounded-xl border p-4 ${
+                      grade.overallScore >= MASTERY_PASS
+                        ? "border-lime-deep/40 bg-lime/10"
+                        : "border-amber/30 bg-amber/5"
+                    }`}
+                  >
+                    <div className="font-display text-2xl text-text">
+                      {Math.round(grade.overallScore * 100)}%{" "}
+                      {grade.overallScore >= MASTERY_PASS ? (
+                        <span className="text-lime">— mastered ✓</span>
+                      ) : (
+                        <span className="text-amber">— not yet</span>
+                      )}
+                    </div>
+                    <div className="mt-1 text-sm text-text-dim">{grade.summary}</div>
+                  </div>
+                  <div className="space-y-3">
+                    {grade.results.map((r, i) => {
+                      const mark = r.verdict === "correct" ? "✓" : r.verdict === "partial" ? "≈" : "✗";
+                      const col = r.verdict === "correct" ? "text-lime" : "text-amber";
+                      return (
+                        <div key={i} className="text-sm">
+                          <div className={`${col} font-mono`}>
+                            {mark} {exam[i]?.question}
+                          </div>
+                          <div className="mt-0.5 text-text-dim">{r.feedback}</div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <button
+                    onClick={finishAssess}
+                    className="mt-6 rounded-lg bg-lime px-5 py-2.5 text-sm font-semibold text-[#07080a] hover:-translate-y-0.5"
+                  >
+                    {grade.overallScore >= MASTERY_PASS ? "continue →" : "back to plan →"}
+                  </button>
+                </div>
+              )}
               {Busy}
               {Err}
             </div>
