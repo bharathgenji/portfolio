@@ -35,6 +35,7 @@ A small fleet of specialized agents, orchestrated by the CLI:
 | **Curriculum Planner** | Designs an ordered path from where you are → your goal |
 | **Tutor** | Teaches each module with analogies, examples, a check question |
 | **Flashcards + SM-2** | Generates cards and schedules spaced review |
+| **Examiner** | Quizzes you per module, grades your answers, tracks mastery |
 
 ## Config
 
@@ -49,6 +50,8 @@ Claude or OpenAI without touching the rest.
 ```bash
 tutor learn "<topic>"     # diagnose & plan, then teach the next lesson each run
 tutor review "<topic>"    # spaced-repetition review of due flashcards
+tutor assess "<topic>"    # graded mastery check for the next module
+tutor status "<topic>"    # progress toward your target level
 tutor list                # topics & progress
 ```
 
@@ -56,5 +59,5 @@ tutor list                # topics & progress
 
 - [x] Diagnose → assess → personalized curriculum
 - [x] Teach modules + auto-generated flashcards (SM-2 spaced repetition) + `review`
-- [ ] Per-module assessments, mastery tracking, adaptive re-planning
-- [ ] `status` command + portfolio showcase page
+- [x] Per-module LLM-graded assessments, mastery tracking, `status` dashboard
+- [ ] Portfolio `/learn` showcase page + tests

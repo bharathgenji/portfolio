@@ -10,8 +10,13 @@ import {
   planCurriculum,
   teachModule,
   generateFlashcards,
+  assessmentQuestions,
+  gradeAssessment,
   TARGET_LEVELS,
 } from "./lib/agents.mjs";
+
+const MASTERY_PASS = 0.8;
+const DONE = new Set(["mastered", "known"]);
 
 const PRIORITY_COLOR = { core: c.lime, review: c.faint, stretch: c.amber };
 
@@ -110,15 +115,9 @@ async function teachNext(state, slug) {
   banner(`learn-agent · ${state.topic}`, `target: ${state.targetLevel}`);
 
   if (!next) {
-    const due = dueCards(state.flashcards).length;
-    line(c.lime("🎉 You've been taught every module in your plan."));
-    line(
-      c.dim(
-        due
-          ? `${due} flashcard(s) due — run:  tutor review "${state.topic}"`
-          : "No reviews due right now. (Assessments + mastery tracking land next build.)",
-      ),
-    );
+    line(c.lime("✓ Every module in your plan has been taught."));
+    line("");
+    printProgress(state);
     return;
   }
 
@@ -226,6 +225,144 @@ async function cmdReview(topicArg) {
   line(c.lime(`✓ Reviewed ${due.length} card(s).`) + c.dim(left ? ` ${left} still due.` : " All caught up!"));
 }
 
+// LLM-graded mastery check for the next taught-but-unmastered module.
+async function cmdAssess(topicArg) {
+  const r = resolveTopic(topicArg);
+  if (!r) return;
+  const { slug, state } = r;
+  const level = state.diagnostic?.assessment?.level || "beginner";
+  banner(`learn-agent · ${state.topic}`, "mastery check");
+
+  const mod = state.curriculum.find((m) => m.status === "learning");
+  if (!mod) {
+    if (state.curriculum.some((m) => m.status === "todo"))
+      line(c.dim(`Teach a lesson first:  tutor learn "${state.topic}"`));
+    else printProgress(state);
+    return;
+  }
+
+  rule(`assessment · ${mod.title}`);
+  let stop = spinnerStart("writing your mastery check…");
+  let questions;
+  try {
+    questions = await assessmentQuestions(state.topic, mod, level);
+  } finally {
+    stop();
+  }
+
+  const qa = [];
+  for (const q of questions) {
+    const a = await prompt(q.question);
+    qa.push({ question: q.question, answer: a });
+    line("");
+  }
+
+  stop = spinnerStart("grading your answers…");
+  let graded;
+  try {
+    graded = await gradeAssessment(state.topic, mod, qa);
+  } finally {
+    stop();
+  }
+
+  rule("results");
+  (graded.results || []).forEach((res, i) => {
+    const mark =
+      res.verdict === "correct" ? c.lime("✓") : res.verdict === "partial" ? c.amber("≈") : c.amber("✗");
+    line(`  ${mark} ${c.dim(qa[i]?.question || "")}`);
+    line(`     ${c.faint(res.feedback)}`);
+  });
+
+  const score = graded.overallScore ?? 0;
+  mod.mastery = Math.round(score * 100) / 100;
+  line("");
+  line(`  score: ${score >= MASTERY_PASS ? c.lime(pct(score)) : c.amber(pct(score))}  ${c.dim(graded.summary || "")}`);
+  if (score >= MASTERY_PASS) {
+    mod.status = "mastered";
+    line(c.lime(`\n  ✓ "${mod.title}" mastered.`));
+  } else {
+    line(c.amber(`\n  Not there yet — run  tutor review "${state.topic}"  then assess again.`));
+  }
+  state.log.push({ at: new Date().toISOString(), event: "assessed", module: mod.id, score });
+  store.save(slug, state);
+  line("");
+  printProgress(state);
+}
+
+// Progress dashboard.
+function cmdStatus(topicArg) {
+  const r = resolveTopic(topicArg);
+  if (!r) return;
+  const { state } = r;
+  banner(
+    `learn-agent · ${state.topic}`,
+    `target: ${state.targetLevel} · started at: ${state.diagnostic?.assessment?.level || "?"}`,
+  );
+  state.curriculum.forEach((m) => {
+    const icon =
+      m.status === "mastered"
+        ? c.lime("●")
+        : m.status === "known"
+          ? c.mint("✓")
+          : m.status === "learning"
+            ? c.amber("◐")
+            : c.faint("○");
+    line(`  ${icon} ${c.bold(m.title)} ${c.faint(`[${m.priority}]`)}`);
+    line(`     ${masteryBar(m.mastery || 0)}`);
+  });
+  line("");
+  printProgress(state);
+}
+
+// ── helpers ──────────────────────────────────────────────────────────────────
+function resolveTopic(topicArg) {
+  let topic = topicArg;
+  if (!topic) {
+    const topics = store.listTopics();
+    if (topics.length === 1) topic = topics[0].topic;
+    else {
+      line(c.amber('Which topic? e.g.  tutor <cmd> "vector databases"'));
+      return null;
+    }
+  }
+  const slug = store.slugify(topic);
+  const state = store.load(slug);
+  if (!state) {
+    line(c.amber(`No saved topic "${topic}". Start with: tutor learn "${topic}"`));
+    return null;
+  }
+  return { topic, slug, state };
+}
+
+function pct(x) {
+  return `${Math.round(x * 100)}%`;
+}
+
+function masteryBar(m) {
+  const f = Math.max(0, Math.min(10, Math.round(m * 10)));
+  return c.lime("█".repeat(f)) + c.faint("░".repeat(10 - f)) + c.faint(` ${pct(m)}`);
+}
+
+function nextAction(state) {
+  if (state.curriculum.some((m) => m.status === "todo")) return `tutor learn "${state.topic}"   (next lesson)`;
+  if (dueCards(state.flashcards).length) return `tutor review "${state.topic}"   (cards due)`;
+  if (state.curriculum.some((m) => m.status === "learning")) return `tutor assess "${state.topic}"   (mastery check)`;
+  return `you're done — tutor status "${state.topic}"`;
+}
+
+function printProgress(state) {
+  const mods = state.curriculum;
+  const done = mods.filter((m) => DONE.has(m.status)).length;
+  const core = mods.filter((m) => m.priority === "core");
+  const coreDone = core.filter((m) => DONE.has(m.status)).length;
+  const reached = core.length > 0 && core.every((m) => DONE.has(m.status));
+  const due = dueCards(state.flashcards).length;
+  rule("progress");
+  line(`  ${c.bold(`${done}/${mods.length}`)} modules complete · ${coreDone}/${core.length} core · ${due} cards due`);
+  if (reached) line(c.lime(`\n  🎉 You've reached "${state.targetLevel}" on ${state.topic}!`));
+  else line(c.faint(`\n  next → ${nextAction(state)}`));
+}
+
 function printCurriculum(modules) {
   modules.forEach((m, i) => {
     const tag = (PRIORITY_COLOR[m.priority] || c.dim)(`[${m.priority || "core"}]`);
@@ -258,6 +395,8 @@ function help() {
   banner("learn-agent", "an adaptive tutor for any topic");
   line(`  ${c.lime("tutor learn")} ${c.dim('"<topic>"')}   diagnose, plan, then teach the next lesson`);
   line(`  ${c.lime("tutor review")} ${c.dim('"<topic>"')}  spaced-repetition review of due flashcards`);
+  line(`  ${c.lime("tutor assess")} ${c.dim('"<topic>"')}  graded mastery check for the next module`);
+  line(`  ${c.lime("tutor status")} ${c.dim('"<topic>"')}  progress toward your target level`);
   line(`  ${c.lime("tutor list")}              your topics & progress`);
   line(`  ${c.lime("tutor help")}              this`);
   line("");
@@ -270,6 +409,8 @@ async function main() {
   try {
     if (cmd === "learn") await cmdLearn(arg);
     else if (cmd === "review") await cmdReview(arg);
+    else if (cmd === "assess") await cmdAssess(arg);
+    else if (cmd === "status") cmdStatus(arg);
     else if (cmd === "list") cmdList();
     else help();
   } catch (err) {

@@ -154,3 +154,67 @@ export async function generateFlashcards(topic, module, level) {
   });
   return cards ?? [];
 }
+
+// ── Assessor ─────────────────────────────────────────────────────────────────
+const ASSESS_Q_SCHEMA = {
+  type: Type.OBJECT,
+  properties: {
+    questions: {
+      type: Type.ARRAY,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          id: { type: Type.STRING },
+          question: { type: Type.STRING },
+        },
+        required: ["id", "question"],
+      },
+    },
+  },
+  required: ["questions"],
+};
+
+export async function assessmentQuestions(topic, module, level) {
+  const { questions } = await askJSON({
+    system:
+      "You write a short mastery check for ONE module. 4 open-ended questions that test real understanding and application (not recall of trivia). Order easy → hard. One sentence each.",
+    user: `Topic: "${topic}". Learner level: ${level}. Module: "${module.title}" — ${module.summary}. Write the assessment questions.`,
+    schema: ASSESS_Q_SCHEMA,
+    temperature: 0.4,
+  });
+  return questions ?? [];
+}
+
+const GRADE_SCHEMA = {
+  type: Type.OBJECT,
+  properties: {
+    overallScore: { type: Type.NUMBER, description: "0.0–1.0 across all answers" },
+    summary: { type: Type.STRING, description: "1-2 sentences: how they did + what to shore up" },
+    results: {
+      type: Type.ARRAY,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          verdict: { type: Type.STRING, description: "correct | partial | incorrect" },
+          score: { type: Type.NUMBER, description: "0.0–1.0 for this answer" },
+          feedback: { type: Type.STRING, description: "short, teaches the right answer" },
+        },
+        required: ["verdict", "score", "feedback"],
+      },
+    },
+  },
+  required: ["overallScore", "summary", "results"],
+};
+
+export async function gradeAssessment(topic, module, qa) {
+  const transcript = qa
+    .map((x, i) => `Q${i + 1}: ${x.question}\nA${i + 1}: ${x.answer || "(no answer)"}`)
+    .join("\n\n");
+  return askJSON({
+    system:
+      "You grade a learner's answers to a module mastery check. Be fair and award partial credit. For each answer give a verdict (correct/partial/incorrect), a 0–1 score, and short feedback that teaches the correct idea. Then give an overallScore (average) and a one-line summary. 'No answer' scores 0.",
+    user: `Topic: "${topic}". Module: "${module.title}".\n\n${transcript}\n\nGrade it.`,
+    schema: GRADE_SCHEMA,
+    temperature: 0.2,
+  });
+}
