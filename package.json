@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test": "playwright test",
     "test:report": "playwright show-report",
+    "test:tutor": "node --test tutor",
     "tutor": "node tutor/index.mjs"
   },
   "dependencies": {

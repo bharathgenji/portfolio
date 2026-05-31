@@ -55,8 +55,11 @@ test.describe("Portfolio — page & content", () => {
 
   test("contact links point to real profiles with safe rel", async ({ page }) => {
     await page.goto("/");
-    const linkedin = page.getByRole("link", { name: /linkedin/i }).first();
-    const github = page.getByRole("link", { name: /github/i }).first();
+    // Scope to the footer — the live news feed can contain links whose titles
+    // mention "github"/"linkedin", which would otherwise match.
+    const footer = page.locator("#contact");
+    const linkedin = footer.getByRole("link", { name: /linkedin/i }).first();
+    const github = footer.getByRole("link", { name: /github/i }).first();
     await expect(linkedin).toHaveAttribute("href", /linkedin\.com\/in\/bharath-gm/);
     await expect(github).toHaveAttribute("href", /github\.com\/Bharath-GM/);
     // external links should open in a new tab safely

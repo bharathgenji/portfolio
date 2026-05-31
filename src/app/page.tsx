@@ -7,6 +7,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import LabSection from "@/components/LabSection";
 import NewsSection from "@/components/NewsSection";
 import PlaybookTeaser from "@/components/PlaybookTeaser";
+import TutorTeaser from "@/components/TutorTeaser";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
         <LabSection />
         <NewsSection />
         <PlaybookTeaser />
+        <TutorTeaser />
       </main>
       <Footer />
     </>
