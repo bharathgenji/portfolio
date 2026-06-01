@@ -3,7 +3,7 @@ title: "Cache your prompt prefix. You're paying for it twice otherwise."
 date: "2026-06-01"
 summary: "Your system prompt gets re-processed on every API call — unless you structure your prompt so the static parts land in the cache."
 tags: ["agents", "cost", "latency"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
