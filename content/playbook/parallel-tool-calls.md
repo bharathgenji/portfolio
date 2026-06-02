@@ -3,7 +3,7 @@ title: "Independent tool calls should run in parallel. Most don't."
 date: "2026-06-02"
 summary: "When your agent needs three independent pieces of data, there's no reason to fetch them one at a time — except nobody told it not to."
 tags: ["agents", "latency", "tool-calling"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
