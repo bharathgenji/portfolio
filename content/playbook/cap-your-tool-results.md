@@ -3,7 +3,7 @@ title: "Your tool results are eating your context window"
 date: "2026-06-03"
 summary: "A single unfiltered database dump or web page fetch can consume half your token budget — and the failure mode is silent degradation, not a crash."
 tags: ["agents", "latency", "production"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
