@@ -3,7 +3,7 @@ title: "Most agent steps don't need your best model"
 date: "2026-06-04"
 summary: "Running every call in your agent loop through the same expensive model is the most common production cost mistake — and the fix is structural, not clever."
 tags: ["agents", "cost", "latency"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
