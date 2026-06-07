@@ -3,7 +3,7 @@ title: "Thread a Trace ID Through Every Tool Call"
 date: "2026-06-06"
 summary: "Without a stable correlation key across every tool call and log line, debugging a production agent failure means sifting through noise until something looks familiar."
 tags: ["agents", "observability", "production"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
