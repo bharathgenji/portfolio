@@ -3,7 +3,7 @@ title: "Add a judge call before high-stakes agent actions"
 date: "2026-06-05"
 summary: "When your agent decides to write to a database or send an email, 'it looked right' isn't a safety strategy — a cheap secondary check is."
 tags: ["agents", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
