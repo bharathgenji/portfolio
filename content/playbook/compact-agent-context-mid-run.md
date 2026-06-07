@@ -3,7 +3,7 @@ title: "Compact your agent's context before it fills up"
 date: "2026-06-07"
 summary: "Long-running agents accumulate context until they silently degrade or hard-error — proactive compaction is the fix, and the trigger point matters more than you think."
 tags: ["agents", "reliability", "context"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
