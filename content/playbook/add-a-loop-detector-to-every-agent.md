@@ -3,7 +3,7 @@ title: "Add a Loop Detector to Every Agent"
 date: "2026-06-09"
 summary: "Agents don't know they're repeating themselves — you have to tell them, before they burn your token budget proving it."
 tags: ["agents", "reliability", "production"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
