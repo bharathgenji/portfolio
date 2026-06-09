@@ -3,7 +3,7 @@ title: "Separate planning from execution in your agent loop"
 date: "2026-06-08"
 summary: "A tight reason-act loop buries every decision inside the run — extracting a structured plan first makes your agent inspectable, debuggable, and safe to pause."
 tags: ["agents", "patterns", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
