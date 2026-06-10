@@ -3,7 +3,7 @@ title: "Set a Hard Timeout on Every Tool Call"
 date: "2026-06-10"
 summary: "One slow external call can hang your agent indefinitely — and the failure is silent, so you won't know until a user complains."
 tags: ["agents", "reliability", "production"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
