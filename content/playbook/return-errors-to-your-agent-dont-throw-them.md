@@ -3,7 +3,7 @@ title: "Return Errors to Your Agent, Don't Throw Them"
 date: "2026-06-11"
 summary: "When a tool fails, your agent's next move depends entirely on what you hand back — an exception tells it nothing; a typed error lets it recover."
 tags: ["agents", "reliability", "tools"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
