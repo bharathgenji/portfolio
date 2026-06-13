@@ -3,7 +3,7 @@ title: "Scope Each Phase to the Tools It Actually Needs"
 date: "2026-06-13"
 summary: "Passing every tool to every agent call is convenient and a silent liability — scope tool sets to phases and you get injection safety, focused reasoning, and sharper traces for free."
 tags: ["agents", "reliability", "security"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
