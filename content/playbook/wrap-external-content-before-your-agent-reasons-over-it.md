@@ -3,7 +3,7 @@ title: "Wrap External Content Before Your Agent Reasons Over It"
 date: "2026-06-12"
 summary: "Every web page, email, and ticket your agent reads is a potential prompt injection — here's how to build a semantic wall."
 tags: ["agents", "security", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
