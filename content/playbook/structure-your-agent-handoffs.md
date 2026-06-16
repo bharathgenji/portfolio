@@ -3,7 +3,7 @@ title: "Structure Your Agent Handoffs"
 date: "2026-06-16"
 summary: "Passing one agent's conversation history into the next is the fastest way to poison a multi-agent pipeline — use a structured handoff document instead."
 tags: ["agents", "multi-agent", "orchestration"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
