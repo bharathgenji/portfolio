@@ -3,7 +3,7 @@ title: "Checkpoint at the Point of No Return"
 date: "2026-06-15"
 summary: "Long-running agents will fail mid-run. Checkpoint before irreversible actions and you restart from there, not from zero."
 tags: ["agents", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
