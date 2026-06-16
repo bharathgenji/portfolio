@@ -3,7 +3,7 @@ title: "Give Your Tools a Batch API"
 date: "2026-06-14"
 summary: "Single-item tool APIs force agents into N sequential calls — the same N+1 problem that plagues database-backed apps, but more expensive."
 tags: ["agents", "tool-design", "latency"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
