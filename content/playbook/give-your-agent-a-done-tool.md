@@ -3,7 +3,7 @@ title: "Give Your Agent a Done Tool"
 date: "2026-06-20"
 summary: "Make task completion explicit: a small tool the agent must call to terminate saves you from parsing prose for a finish signal."
 tags: ["agents", "reliability", "tool-design"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
