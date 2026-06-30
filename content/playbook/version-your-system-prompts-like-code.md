@@ -3,7 +3,7 @@ title: "Version Your System Prompts Like Code"
 date: "2026-06-22"
 summary: "A prompt change is a deployment — treat it like one or keep getting burned by invisible regressions."
 tags: ["agents", "reliability", "evals"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
