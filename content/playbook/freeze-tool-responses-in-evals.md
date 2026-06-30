@@ -3,7 +3,7 @@ title: "Freeze Tool Responses for Fast, Deterministic Evals"
 date: "2026-06-19"
 summary: "If your evals hit real APIs every run, you'll stop running them — fixture-based replay is what makes an eval suite something you actually use."
 tags: ["agents", "evals", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
