@@ -3,7 +3,7 @@ title: "Design tool results for the model that reads them"
 date: "2026-06-29"
 summary: "Your tool returns clean JSON your code can parse — but the model is reading it too, and internal IDs, cryptic field names, and raw status codes are eating your reasoning quality."
 tags: ["agents", "tools", "context"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
