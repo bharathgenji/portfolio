@@ -3,7 +3,7 @@ title: "Add a circuit breaker to tools that call unreliable services"
 date: "2026-06-25"
 summary: "When a downstream API is down, your agent will keep hammering it — a circuit breaker breaks that cycle before it burns minutes of clock time and dozens of reasoning steps."
 tags: ["agents", "reliability", "tooling"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
