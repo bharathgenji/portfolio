@@ -3,7 +3,7 @@ title: "Give Your Agent a Think Tool"
 date: "2026-06-26"
 summary: "Invisible reasoning is undebuggable reasoning — make the model commit its logic to a structured tool call you can log, trace, and grep."
 tags: ["agents", "observability", "debugging"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
