@@ -3,7 +3,7 @@ title: "Cache Read-Only Tool Calls Within a Run"
 date: "2026-06-27"
 summary: "Agents fetch the same data repeatedly without knowing it — a transparent cache at the dispatcher level stops the waste without changing any model behavior."
 tags: ["agents", "cost", "performance"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
