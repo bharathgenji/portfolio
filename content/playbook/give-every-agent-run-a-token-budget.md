@@ -3,7 +3,7 @@ title: "Give Every Agent Run a Token Budget"
 date: "2026-06-18"
 summary: "An agent that doesn't know how much runway it has will use all of it — here's how to fix that."
 tags: ["agents", "cost", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
