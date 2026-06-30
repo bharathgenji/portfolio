@@ -3,7 +3,7 @@ title: "Validate tool arguments before you run them"
 date: "2026-06-28"
 summary: "JSON schema says the call is valid — your business rules might disagree. A semantic validator at the tool boundary is cheaper and safer than repeating constraints in the prompt."
 tags: ["agents", "reliability", "tools"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
