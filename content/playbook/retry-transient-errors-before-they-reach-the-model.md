@@ -3,7 +3,7 @@ title: "Retry Transient Errors Before They Reach the Model"
 date: "2026-06-23"
 summary: "Infrastructure errors like rate limits and timeouts should never pollute your agent's context — retry them silently, and reserve structured errors for failures the model can actually reason about."
 tags: ["agents", "reliability", "tooling"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
