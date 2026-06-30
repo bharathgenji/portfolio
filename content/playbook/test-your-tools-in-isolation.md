@@ -3,7 +3,7 @@ title: "Test Your Tools in Isolation, Not Through Your Agent"
 date: "2026-06-24"
 summary: "When your agent fails, you need to know if the tool returned bad data or the model misread good data — and you can't tell unless you've tested them separately."
 tags: ["agents", "testing", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
