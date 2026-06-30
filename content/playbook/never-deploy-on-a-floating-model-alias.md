@@ -3,7 +3,7 @@ title: "Never Deploy an Agent on a Floating Model Alias"
 date: "2026-06-17"
 summary: "Using 'claude-latest' or 'gpt-4' in production is a silent dependency on a moving target — the model your evals tested is not the model your users run."
 tags: ["agents", "reliability", "production"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
