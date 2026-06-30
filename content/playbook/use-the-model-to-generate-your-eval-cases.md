@@ -3,7 +3,7 @@ title: "Use the Model to Generate Your Eval Cases"
 date: "2026-06-30"
 summary: "Writing eval cases by hand doesn't scale — but the model knows your agent's failure modes better than you do."
 tags: ["agents", "evals", "testing"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
