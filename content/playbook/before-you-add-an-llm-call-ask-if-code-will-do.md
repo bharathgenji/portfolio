@@ -3,7 +3,7 @@ title: "Before you add an LLM call, ask if code will do"
 date: "2026-06-21"
 summary: "The fastest, cheapest, most reliable LLM call is the one you never make — and most agent pipelines are full of candidates."
 tags: ["agents", "cost", "patterns"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
