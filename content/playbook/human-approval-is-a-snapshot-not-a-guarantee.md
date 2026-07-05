@@ -3,7 +3,7 @@ title: "Human Approval Is a Snapshot, Not a Guarantee"
 date: "2026-07-04"
 summary: "The state your agent showed a human at approval time isn't the state it acts on at execution time — and that gap is where wrong actions slip through clean review."
 tags: ["agents", "reliability", "human-in-the-loop"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
