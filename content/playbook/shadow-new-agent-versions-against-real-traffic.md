@@ -3,7 +3,7 @@ title: "Shadow New Agent Versions Against Real Traffic"
 date: "2026-07-02"
 summary: "Evals catch the failure modes you thought to write down — shadow traffic catches the ones you didn't."
 tags: ["agents", "reliability", "deployment"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
