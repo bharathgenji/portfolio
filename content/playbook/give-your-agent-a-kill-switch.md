@@ -3,7 +3,7 @@ title: "Give Your Agent a Kill Switch"
 date: "2026-07-05"
 summary: "Ctrl-C on a running agent doesn't mean what you think it means — build a cancellation path that stops between actions, not mid-action."
 tags: ["agents", "reliability", "production"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
