@@ -3,7 +3,7 @@ title: "Give Your Agent a Dry-Run Mode"
 date: "2026-07-01"
 summary: "You can't review a plan you can't see — a dry-run mode lets you preview every side effect an agent would cause before any of them actually happen."
 tags: ["agents", "testing", "tool-design"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
