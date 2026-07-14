@@ -3,7 +3,7 @@ title: "Give Long-Running Tools a Job Handle, Not a Wait"
 date: "2026-07-08"
 summary: "A tool that blocks for ten minutes doesn't just risk a timeout — it burns a model turn on nothing, so return a job handle instead and let the agent poll."
 tags: ["agents", "tool-design", "async"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
