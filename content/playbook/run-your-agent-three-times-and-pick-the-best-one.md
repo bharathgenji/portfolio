@@ -3,7 +3,7 @@ title: "Run Your Agent Three Times and Pick the Best One"
 date: "2026-07-13"
 summary: "For hard, ambiguous tasks, sampling an agent N times in parallel and voting beats another week of prompt tweaking on a single run."
 tags: ["agents", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
