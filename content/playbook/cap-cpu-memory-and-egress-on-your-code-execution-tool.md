@@ -3,7 +3,7 @@ title: "Cap CPU, Memory, and Egress on Your Code-Execution Tool"
 date: "2026-07-14"
 summary: "A container is an isolation boundary, not a resource limit — without explicit ceilings, one bad code sample can fork-bomb, exhaust memory, or quietly exfiltrate data through an open network path."
 tags: ["agents", "security", "tool-design"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
