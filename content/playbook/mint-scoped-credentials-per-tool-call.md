@@ -3,7 +3,7 @@ title: "Mint Scoped Credentials Per Tool Call, Not Per Agent"
 date: "2026-07-12"
 summary: "The agent process holding one long-lived, do-everything API key is the credential equivalent of passing every tool to every phase — and it fails the same way."
 tags: ["agents", "security", "tool-design"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
