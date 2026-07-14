@@ -3,7 +3,7 @@ title: "Keep the Clock and the RNG Out of Your Agent Loop"
 date: "2026-07-09"
 summary: "A resumed agent run that calls the system clock or a random generator directly won't reproduce the original run — it'll quietly diverge, and you'll debug the wrong thing."
 tags: ["agents", "reliability", "determinism"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
