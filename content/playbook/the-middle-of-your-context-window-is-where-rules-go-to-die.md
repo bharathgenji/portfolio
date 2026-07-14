@@ -3,7 +3,7 @@ title: "The Middle of Your Context Window Is Where Rules Go to Die"
 date: "2026-07-11"
 summary: "Your system prompt's constraints don't disappear from context, they just stop being read once forty tool results bury them in the middle."
 tags: ["agents", "context", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
