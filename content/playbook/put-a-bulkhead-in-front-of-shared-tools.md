@@ -3,7 +3,7 @@ title: "Put a Bulkhead in Front of Shared Tools"
 date: "2026-07-06"
 summary: "Fifty parallel agent runs hitting the same enrichment API don't fail because the API is down — they fail because nothing capped how many could hit it at once."
 tags: ["agents", "reliability", "concurrency"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
