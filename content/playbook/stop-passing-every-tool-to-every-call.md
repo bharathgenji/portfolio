@@ -3,7 +3,7 @@ title: "Stop Passing Every Tool to Every Call"
 date: "2026-07-07"
 summary: "Past a few dozen tools, accuracy drops and tokens balloon — the fix isn't a leaner tool set, it's retrieving the right subset per turn instead of shipping all of them every time."
 tags: ["agents", "tools", "cost"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
