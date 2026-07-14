@@ -3,7 +3,7 @@ title: "Give Every Agent Action a Compensating Action"
 date: "2026-07-10"
 summary: "Idempotency stops duplicate side effects on retry — it does nothing for the invite your agent already sent before step 6 failed for good."
 tags: ["agents", "reliability", "orchestration"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
