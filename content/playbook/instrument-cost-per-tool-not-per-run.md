@@ -3,7 +3,7 @@ title: "Instrument Cost Per Tool, Not Per Run"
 date: "2026-07-15"
 summary: "A total cost-per-run number tells you the bill is too high; it never tells you which of your fourteen tools is the reason."
 tags: ["agents", "cost", "observability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
