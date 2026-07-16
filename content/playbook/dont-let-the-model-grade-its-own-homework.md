@@ -3,7 +3,7 @@ title: "Don't Let the Model Grade Its Own Homework"
 date: "2026-07-16"
 summary: "An LLM judge from the same family as your actor model isn't neutral — it's rating its own writing style as correct."
 tags: ["agents", "evals", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
