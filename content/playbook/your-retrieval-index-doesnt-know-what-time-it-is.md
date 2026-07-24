@@ -3,7 +3,7 @@ title: "Your Retrieval Index Doesn't Know What Time It Is"
 date: "2026-07-17"
 summary: "Cosine similarity has no idea a document is three weeks stale — so your agent will cite last month's policy with this month's confidence."
 tags: ["agents", "rag", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
