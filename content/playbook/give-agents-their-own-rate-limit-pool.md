@@ -3,7 +3,7 @@ title: "Give Agents Their Own Rate Limit Pool"
 date: "2026-07-20"
 summary: "An agent stuck in a retry loop shouldn't be able to eat the API quota your paying users depend on — but it will, if you let it share a bucket with them."
 tags: ["agents", "reliability", "infrastructure"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
