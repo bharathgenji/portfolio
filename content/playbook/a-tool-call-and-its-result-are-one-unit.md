@@ -3,7 +3,7 @@ title: "A Tool Call and Its Result Are One Unit"
 date: "2026-07-24"
 summary: "Truncate or compact a message history by raw index instead of by turn, and you'll eventually split a tool_use from its tool_result — and the API will reject the very next call."
 tags: ["agents", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
