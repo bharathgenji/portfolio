@@ -3,7 +3,7 @@ title: "Long-Running Agents Don't Know You Redeployed Their Tools"
 date: "2026-07-22"
 summary: "A tool schema is part of the conversation the moment it's sent — change it under a session that's still running and you get malformed calls, not a clean upgrade."
 tags: ["agents", "reliability", "deployment"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
