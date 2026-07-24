@@ -3,7 +3,7 @@ title: "The Agent Said It Worked. Check Anyway."
 date: "2026-07-21"
 summary: "A completion summary is a claim the model is making about the world, not a measurement of it — verify the outcome independently before you believe it."
 tags: ["agents", "reliability", "verification"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
