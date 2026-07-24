@@ -3,7 +3,7 @@ title: "A Child Agent's Timeout Is a Slice, Not a Copy"
 date: "2026-07-23"
 summary: "Give every sub-agent the same deadline as its parent and the fourth one in a sequential fan-out inherits a promise the run can no longer keep."
 tags: ["agents", "multi-agent", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
