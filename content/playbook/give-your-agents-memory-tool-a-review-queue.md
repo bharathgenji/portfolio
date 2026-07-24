@@ -3,7 +3,7 @@ title: "Give Your Agent's Memory Tool a Review Queue"
 date: "2026-07-18"
 summary: "A wrong fact in the context window disappears when the session ends. A wrong fact in long-term memory gets retrieved as ground truth forever — until you build a way to catch it."
 tags: ["agents", "memory", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
