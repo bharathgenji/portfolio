@@ -3,7 +3,7 @@ title: "Don't Execute a Tool Call Until Its JSON Is Complete"
 date: "2026-07-19"
 summary: "Streaming APIs hand you tool arguments one fragment at a time — fire the tool on a fragment and you'll edit the wrong file, charge the wrong amount, or crash on invalid JSON."
 tags: ["agents", "streaming", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
