@@ -3,7 +3,7 @@ title: "Stateful Tools Need Sticky Sessions"
 date: "2026-07-25"
 summary: "A browser or shell tool that lives in worker memory works perfectly in dev and breaks the moment you run two workers — because the model calls it like a function, but it isn't one."
 tags: ["agents", "tool-design", "infrastructure"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
