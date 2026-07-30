@@ -3,7 +3,7 @@ title: "Run a Canary Prompt Through Production"
 date: "2026-07-30"
 summary: "A pinned model ID doesn't guarantee a pinned answer — the only way to catch silent drift is to keep asking your live agent the same question and watching for a different one."
 tags: ["agents", "reliability", "monitoring"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
