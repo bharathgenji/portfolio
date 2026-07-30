@@ -3,7 +3,7 @@ title: "Parallel Tool Calls Need a Concurrency Story for Writes"
 date: "2026-07-28"
 summary: "You parallelized independent tool calls for latency, then two of them turned out to write the same row — and the last one to finish quietly won."
 tags: ["agents", "concurrency", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
