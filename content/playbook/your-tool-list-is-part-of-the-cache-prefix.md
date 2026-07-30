@@ -3,7 +3,7 @@ title: "Your Tool List Is Part of the Cache Prefix"
 date: "2026-07-27"
 summary: "Scope your tools per phase and retrieve them dynamically, and you've quietly broken the prompt cache you built to save money — the two techniques fight each other unless you know where the boundary is."
 tags: ["agents", "cost", "caching"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
