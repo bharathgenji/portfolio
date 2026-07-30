@@ -3,7 +3,7 @@ title: "Fan-Out Multiplies Failure, Not Just Cost"
 date: "2026-07-29"
 summary: "Eight sub-agents at 95% success each sounds fine until you multiply — the batch succeeds two times in three, and no single dashboard shows why."
 tags: ["agents", "multi-agent", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
