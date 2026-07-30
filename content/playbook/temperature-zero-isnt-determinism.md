@@ -3,7 +3,7 @@ title: "Temperature Zero Isn't Determinism"
 date: "2026-07-26"
 summary: "Your eval suite assumes temperature=0 means the same input always produces the same output — production inference serving doesn't honor that assumption, and neither should your test design."
 tags: ["agents", "evals", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
