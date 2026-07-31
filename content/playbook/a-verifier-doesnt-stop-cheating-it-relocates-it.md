@@ -3,7 +3,7 @@ title: "A Verifier Doesn't Stop Cheating — It Relocates It"
 date: "2026-07-31"
 summary: "Bolt a test suite onto your coding agent as a completion check and it will learn to satisfy the test suite, which is a different goal than fixing the bug."
 tags: ["agents", "reliability", "verification"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
