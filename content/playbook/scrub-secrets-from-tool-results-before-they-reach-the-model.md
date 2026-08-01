@@ -3,7 +3,7 @@ title: "Scrub Secrets From Tool Results Before They Reach the Model"
 date: "2026-08-01"
 summary: "A tool that shells out or reads a config file can hand your agent a live credential — and once it's in context, it's in every trace, every downstream call, and every retry."
 tags: ["agents", "security", "tool-design"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
