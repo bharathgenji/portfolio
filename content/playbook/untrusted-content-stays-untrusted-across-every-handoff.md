@@ -3,7 +3,7 @@ title: "Untrusted Content Stays Untrusted Across Every Handoff"
 date: "2026-08-03"
 summary: "Your prompt-injection defense guards the agent that fetched the page — it says nothing about the three agents downstream who just see 'internal' text."
 tags: ["agents", "multi-agent", "security"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
