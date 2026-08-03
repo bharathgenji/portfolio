@@ -3,7 +3,7 @@ title: "Give Your Agent a Scratch File, Not a Bigger Context Window"
 date: "2026-08-02"
 summary: "Compaction decides what to discard from context — the better fix is making sure large artifacts never enter context at all."
 tags: ["agents", "context", "architecture"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
