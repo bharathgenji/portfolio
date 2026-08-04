@@ -3,7 +3,7 @@ title: "Pool Your Code-Execution Sandboxes"
 date: "2026-08-04"
 summary: "A fresh container per tool call feels like the safe default, but the cold start is often longer than the code it's about to run."
 tags: ["agents", "latency", "tool-design"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
