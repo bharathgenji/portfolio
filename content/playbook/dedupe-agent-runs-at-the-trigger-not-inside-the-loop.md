@@ -3,7 +3,7 @@ title: "Dedupe Agent Runs at the Trigger, Not Inside the Loop"
 date: "2026-08-05"
 summary: "Webhooks fire at-least-once, users double-click, queues redeliver — if you only made your agent's actions idempotent, you're still paying for and racing full duplicate runs."
 tags: ["agents", "reliability", "production"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
