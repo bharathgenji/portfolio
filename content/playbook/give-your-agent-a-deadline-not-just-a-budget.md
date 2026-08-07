@@ -3,7 +3,7 @@ title: "Give Your Agent a Deadline, Not Just a Budget"
 date: "2026-08-07"
 summary: "A token budget caps what a run costs — it does nothing to cap how long it takes, and a single slow tool call can blow your SLA while staying well under budget."
 tags: ["agents", "reliability", "latency"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
