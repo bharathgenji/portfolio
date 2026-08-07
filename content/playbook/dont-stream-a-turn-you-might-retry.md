@@ -3,7 +3,7 @@ title: "Don't Stream a Turn You Might Retry"
 date: "2026-08-06"
 summary: "Token-by-token streaming feels free until your agent needs to retract what it just showed the user — then every retry is a visible contradiction, not a silent redo."
 tags: ["agents", "ux", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
