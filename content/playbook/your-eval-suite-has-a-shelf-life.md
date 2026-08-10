@@ -3,7 +3,7 @@ title: "Your Eval Suite Has a Shelf Life"
 date: "2026-08-08"
 summary: "A suite that scores 19/20 forever isn't proof your agent is solid — it might just mean nobody's checked whether it still covers what users actually ask."
 tags: ["agents", "evals", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
