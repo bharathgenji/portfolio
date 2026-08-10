@@ -3,7 +3,7 @@ title: "Give Your Agent a Clarify Tool, Not a Guess"
 date: "2026-08-09"
 summary: "An agent that silently picks the wrong interpretation of an ambiguous request is more dangerous than one that asks — but only if you make asking cheap and rare enough to actually work."
 tags: ["agents", "tool-design", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
