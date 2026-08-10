@@ -3,7 +3,7 @@ title: "Thinking Blocks Travel With Their Tool Call"
 date: "2026-08-10"
 summary: "Extended thinking output looks like disposable scratch text, but strip it out of a multi-turn tool-use history and the next call either breaks or gets measurably dumber."
 tags: ["agents", "context-management", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
