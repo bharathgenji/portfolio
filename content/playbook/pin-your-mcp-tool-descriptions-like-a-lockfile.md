@@ -3,7 +3,7 @@ title: "Pin Your MCP Tool Descriptions Like a Lockfile"
 date: "2026-08-11"
 summary: "You reviewed a third-party MCP server's tools once and approved them — nothing stops the server from rewriting those descriptions on the next fetch, and your agent will trust the new text exactly as much as the old."
 tags: ["agents", "security", "mcp"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
