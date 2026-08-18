@@ -3,7 +3,7 @@ title: "An Appended Correction Doesn't Undo the Original Claim"
 date: "2026-08-18"
 summary: "Tell an agent 'that number was wrong' and the wrong number is still sitting in context, still shaped like an answer — and it keeps citing it anyway."
 tags: ["agents", "context", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
