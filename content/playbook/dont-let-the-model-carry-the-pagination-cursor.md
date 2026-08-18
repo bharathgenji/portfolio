@@ -3,7 +3,7 @@ title: "Don't Let the Model Carry the Pagination Cursor"
 date: "2026-08-13"
 summary: "An opaque cursor token round-tripped through the model's own output is a string the model is statistically willing to paraphrase — and a paraphrased cursor fails silently, not loudly."
 tags: ["agents", "tool-design", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
