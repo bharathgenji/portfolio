@@ -3,7 +3,7 @@ title: "Parallel Coding Agents Need Their Own Worktree"
 date: "2026-08-14"
 summary: "Two agents editing the same checkout at once don't conflict like two humans do — they silently stomp each other's uncommitted changes with no merge conflict to even alert you."
 tags: ["agents", "multi-agent", "tool-design"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
