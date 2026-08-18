@@ -3,7 +3,7 @@ title: "Best-of-N Breaks Once Your Agent Can Act"
 date: "2026-08-15"
 summary: "Sampling an agent three times and picking the best transcript works great for text — and sends three refund emails before you've picked a winner."
 tags: ["agents", "reliability", "multi-agent"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
