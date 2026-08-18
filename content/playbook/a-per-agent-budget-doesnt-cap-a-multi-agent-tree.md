@@ -3,7 +3,7 @@ title: "A Per-Agent Budget Doesn't Cap a Multi-Agent Tree"
 date: "2026-08-12"
 summary: "Every agent in the tree stayed under its own token ceiling and the run still cost forty times what you priced it at — because nothing was capping the tree, only the nodes."
 tags: ["agents", "cost", "multi-agent"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
