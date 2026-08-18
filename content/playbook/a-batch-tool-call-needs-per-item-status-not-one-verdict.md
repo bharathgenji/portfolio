@@ -3,7 +3,7 @@ title: "A Batch Tool Call Needs Per-Item Status, Not One Verdict"
 date: "2026-08-16"
 summary: "Fifteen items go into a batch tool call, three fail, and if your API can only say 'success' or 'error' the agent has no way to know which three — or whether to retry the twelve that worked."
 tags: ["agents", "tool-design", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
