@@ -3,7 +3,7 @@ title: "The Prompt Cache Clock Doesn't Stop for Human Approval"
 date: "2026-08-17"
 summary: "Your agent's prompt cache has a five-minute TTL — and a human sitting on an approval button for six minutes quietly hands you a full-price, full-latency call with no error to explain why."
 tags: ["agents", "cost", "human-in-the-loop"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
