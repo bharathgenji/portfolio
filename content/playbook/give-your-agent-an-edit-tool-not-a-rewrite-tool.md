@@ -3,7 +3,7 @@ title: "Give Your Agent an Edit Tool, Not a Rewrite Tool"
 date: "2026-08-19"
 summary: "A write_file tool makes your agent retype every line of a file it barely touched — and past a few hundred lines, it starts quietly dropping the ones it didn't mean to change."
 tags: ["agents", "tool-design", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
