@@ -3,7 +3,7 @@ title: "Private Data, Untrusted Content, Outbound Access — Pick Two"
 date: "2026-08-24"
 summary: "The three capabilities that make an agent useful — reading your data, reading the open web, and talking to the outside world — are the same three that turn a prompt injection into a data breach when one agent holds all of them at once."
 tags: ["agents", "security", "multi-agent"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
