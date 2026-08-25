@@ -3,7 +3,7 @@ title: "Subagent Spawns Are Cache-Cold by Default"
 date: "2026-08-25"
 summary: "You tuned your prompt prefix for cache hits, then wrapped it in an orchestrator — and every subagent call is paying full price because a fresh spawn doesn't inherit anyone's cache."
 tags: ["agents", "cost", "multi-agent"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
