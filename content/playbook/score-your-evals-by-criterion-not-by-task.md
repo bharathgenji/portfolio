@@ -3,7 +3,7 @@ title: "Score Your Evals by Criterion, Not by Task"
 date: "2026-08-23"
 summary: "A pass/fail eval score can hold steady at 18/20 for two straight weeks while your agent gets measurably better at one thing and worse at another — and you'll never see the tradeoff until a customer does."
 tags: ["agents", "evals", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
