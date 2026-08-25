@@ -3,7 +3,7 @@ title: "Tool Order Is a Hidden Prior"
 date: "2026-08-21"
 summary: "Two tools that do almost the same thing get picked unevenly based on where they sit in the array — and the position, not the prompt, is deciding."
 tags: ["agents", "tools", "reliability"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
