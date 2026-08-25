@@ -3,7 +3,7 @@ title: "Don't Ask the Model How Confident It Is — Read the Logprobs"
 date: "2026-08-20"
 summary: "A 'confidence: 0.95' field in your schema is the model's opinion of itself; the logprobs behind that field are the only number that isn't grading its own homework."
 tags: ["agents", "reliability", "evaluation"]
-status: draft
+status: published
 author: "Bharath"
 ---
 
